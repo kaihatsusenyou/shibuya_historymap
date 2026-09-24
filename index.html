@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>渋谷歴史マップ</title>
+  <meta name="description" content="渋谷区の歴史スポットを時代ごとに地図で巡るWebアプリ">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>渋谷歴史マップ</h1>
+    <button id="toggle-panel" class="panel-toggle" aria-controls="panel" aria-expanded="true">一覧</button>
+  </header>
+
+  <main class="app">
+    <aside id="panel" class="panel">
+      <section class="panel-section">
+        <input id="search" type="search" placeholder="スポット名・キーワードで検索" aria-label="検索">
+      </section>
+
+      <section class="panel-section">
+        <h2>時代</h2>
+        <div id="era-filters" class="era-filters"></div>
+      </section>
+
+      <section class="panel-section">
+        <h2>年代 <span id="year-label" class="year-label"></span></h2>
+        <input id="year-slider" type="range" aria-label="この年までのスポットを表示">
+      </section>
+
+      <section class="panel-section">
+        <h2>昔の航空写真を重ねる</h2>
+        <select id="old-photo" aria-label="重ねる航空写真">
+          <option value="">なし</option>
+          <option value="usa">1945〜1950年（終戦直後）</option>
+          <option value="old10">1961〜1969年（東京五輪の頃）</option>
+          <option value="gazo1">1974〜1978年</option>
+        </select>
+        <label class="opacity">
+          透明度
+          <input id="old-photo-opacity" type="range" min="0" max="100" value="70">
+        </label>
+      </section>
+
+      <section class="panel-section list-section">
+        <h2>スポット <span id="count" class="count"></span></h2>
+        <ol id="spot-list" class="spot-list"></ol>
+      </section>
+    </aside>
+
+    <div id="map" class="map" role="application" aria-label="渋谷区の歴史地図"></div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data/spots.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
