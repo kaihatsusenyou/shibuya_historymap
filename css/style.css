@@ -170,3 +170,20 @@ html, body {
 .popup li { margin: 2px 0; line-height: 1.5; }
 .popup .sources { font-size: .75rem; }
 .popup .links { margin-top: 8px; font-size: .8rem; }
+
+/* 負の歴史 */
+.dark-toggle { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: .8rem; cursor: pointer; }
+.dark-toggle input { accent-color: var(--accent); }
+.dark-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #212121; color: #fff; font-size: .7rem; font-weight: 700;
+}
+.spot-marker.dark {
+  display: flex; align-items: center; justify-content: center;
+  border-color: #212121; color: #fff; font-size: 10px; font-weight: 700; line-height: 1;
+}
+.popup .dark-badge { display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 999px; background: #212121; color: #fff; font-size: .7rem; }
+.spot-list .dark-label { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 999px; background: #212121; color: #fff; font-size: .65rem; vertical-align: 2px; }
+.timeline li.dark::before { background: #212121; }
+.timeline li.dark .t-year::after { content: " ●負の歴史"; color: #212121; font-weight: 400; font-size: .65rem; }

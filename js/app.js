@@ -64,6 +64,7 @@
     var era = ERAS[spot.era];
     var html = '<div class="popup">' +
       '<span class="era" style="background:' + era.color + '">' + escapeHtml(era.label) + "</span>" +
+      (spot.dark ? '<span class="dark-badge">' + escapeHtml(spot.dark) + "</span>" : "") +
       (spot.area ? '<span class="area">' + escapeHtml(spot.area) + "</span>" : "") +
       "<h3>" + escapeHtml(spot.name) + "</h3>" +
       '<div class="year">' + escapeHtml(spot.yearLabel) + "</div>" +
@@ -90,7 +91,9 @@
   SPOTS.forEach(function (spot) {
     var icon = L.divIcon({
       className: "",
-      html: '<div class="spot-marker" style="background:' + ERAS[spot.era].color + '"></div>',
+      html: spot.dark
+        ? '<div class="spot-marker dark" style="background:' + ERAS[spot.era].color + '">!</div>'
+        : '<div class="spot-marker" style="background:' + ERAS[spot.era].color + '"></div>',
       iconSize: [18, 18],
       iconAnchor: [9, 9],
       popupAnchor: [0, -10]
@@ -103,6 +106,8 @@
   var state = {
     eras: Object.keys(ERAS).reduce(function (o, k) { o[k] = true; return o; }, {}),
     query: "",
+    showDark: true,
+    onlyDark: false,
     maxYear: Math.max.apply(null, SPOTS.map(function (s) { return s.year; }))
   };
 
@@ -139,12 +144,27 @@
     render();
   });
 
+  var showDark = document.getElementById("show-dark");
+  var onlyDark = document.getElementById("only-dark");
+  showDark.addEventListener("change", function () {
+    state.showDark = showDark.checked;
+    if (!showDark.checked) { onlyDark.checked = false; state.onlyDark = false; }
+    render();
+  });
+  onlyDark.addEventListener("change", function () {
+    state.onlyDark = onlyDark.checked;
+    if (onlyDark.checked) { showDark.checked = true; state.showDark = true; }
+    render();
+  });
+
   function matches(spot) {
     if (!state.eras[spot.era]) return false;
+    if (spot.dark && !state.showDark) return false;
+    if (!spot.dark && state.onlyDark) return false;
     if (spot.year > state.maxYear) return false;
     if (!state.query) return true;
     var hay = [spot.name, spot.area, spot.summary, spot.detail, spot.yearLabel]
-      .concat(spot.tags, spot.highlights || []).join(" ").toLowerCase();
+      .concat(spot.tags, spot.highlights || [], spot.dark ? [spot.dark, "負の歴史"] : []).join(" ").toLowerCase();
     return hay.indexOf(state.query) !== -1;
   }
 
@@ -155,8 +175,9 @@
   function focusSpot(spot) {
     // 絞り込みで非表示のスポットでも、年表などから選ばれたら表示する
     if (!markerLayer.hasLayer(markers[spot.id])) markerLayer.addLayer(markers[spot.id]);
+    // 地図の移動が終わってから開かないと、ポップアップが画面外にはみ出すことがある
+    map.once("moveend", function () { markers[spot.id].openPopup(); });
     map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 16));
-    markers[spot.id].openPopup();
     if (window.matchMedia("(max-width: 720px)").matches) {
       document.getElementById("map").scrollIntoView({ behavior: "smooth" });
     }
@@ -173,7 +194,8 @@
       li.tabIndex = 0;
       li.innerHTML =
         '<span class="bar" style="background:' + ERAS[spot.era].color + '"></span>' +
-        "<div><div class=\"name\">" + escapeHtml(spot.name) + "</div>" +
+        "<div><div class=\"name\">" + escapeHtml(spot.name) +
+        (spot.dark ? '<span class="dark-label">' + escapeHtml(spot.dark) + "</span>" : "") + "</div>" +
         '<div class="meta">' + escapeHtml(spot.yearLabel) + (spot.area ? "・" + escapeHtml(spot.area) : "") + "</div>" +
         '<div class="meta">' + escapeHtml(spot.summary) + "</div></div>";
       li.addEventListener("click", function () { focusSpot(spot); });
@@ -191,9 +213,10 @@
     var li = document.createElement("li");
     var spot = ev.spot && spotById[ev.spot];
     if (spot) li.style.setProperty("--dot", ERAS[spot.era].color);
+    if (ev.dark) li.classList.add("dark");
     li.innerHTML = '<div class="t-year">' + escapeHtml(ev.label) + '</div><div class="t-text">' + escapeHtml(ev.text) + "</div>";
     if (spot) {
-      li.className = "linked";
+      li.classList.add("linked");
       li.tabIndex = 0;
       li.title = spot.name + " を地図で見る";
       li.addEventListener("click", function () { focusSpot(spot); });
