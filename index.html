@@ -44,10 +44,20 @@
         </label>
       </section>
 
-      <section class="panel-section list-section">
-        <h2>スポット <span id="count" class="count"></span></h2>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tab-spots" aria-selected="true" aria-controls="view-spots">スポット <span id="count" class="count"></span></button>
+        <button type="button" role="tab" id="tab-timeline" aria-selected="false" aria-controls="view-timeline">年表</button>
+      </div>
+
+      <section id="view-spots" class="panel-section list-section" role="tabpanel" aria-labelledby="tab-spots">
         <ol id="spot-list" class="spot-list"></ol>
       </section>
+
+      <section id="view-timeline" class="panel-section list-section" role="tabpanel" aria-labelledby="tab-timeline" hidden>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <p class="note">年代・由来には諸説や伝承を含みます。各スポットの参考資料もあわせてご覧ください。</p>
     </aside>
 
     <div id="map" class="map" role="application" aria-label="渋谷区の歴史地図"></div>

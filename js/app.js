@@ -62,13 +62,27 @@
 
   function popupHtml(spot) {
     var era = ERAS[spot.era];
-    return '<div class="popup">' +
+    var html = '<div class="popup">' +
       '<span class="era" style="background:' + era.color + '">' + escapeHtml(era.label) + "</span>" +
+      (spot.area ? '<span class="area">' + escapeHtml(spot.area) + "</span>" : "") +
       "<h3>" + escapeHtml(spot.name) + "</h3>" +
       '<div class="year">' + escapeHtml(spot.yearLabel) + "</div>" +
-      "<p>" + escapeHtml(spot.detail) + "</p>" +
-      '<div class="tags">' + spot.tags.map(function (t) { return "#" + escapeHtml(t); }).join(" ") + "</div>" +
+      "<p>" + escapeHtml(spot.detail) + "</p>";
+    if (spot.highlights && spot.highlights.length) {
+      html += "<h4>見どころ</h4><ul>" + spot.highlights.map(function (h) {
+        return "<li>" + escapeHtml(h) + "</li>";
+      }).join("") + "</ul>";
+    }
+    if (spot.sources && spot.sources.length) {
+      html += '<h4>参考資料</h4><ul class="sources">' + spot.sources.map(function (src) {
+        return '<li><a href="' + escapeHtml(src.url) + '" target="_blank" rel="noopener">' + escapeHtml(src.title) + "</a></li>";
+      }).join("") + "</ul>";
+    }
+    html += '<div class="tags">' + spot.tags.map(function (t) { return "#" + escapeHtml(t); }).join(" ") + "</div>" +
+      '<div class="links"><a href="https://www.google.com/maps/search/?api=1&amp;query=' + spot.lat + "," + spot.lng +
+      '" target="_blank" rel="noopener">地図アプリで開く</a></div>' +
       "</div>";
+    return html;
   }
 
   var markerLayer = L.featureGroup().addTo(map);
@@ -82,7 +96,7 @@
       popupAnchor: [0, -10]
     });
     markers[spot.id] = L.marker([spot.lat, spot.lng], { icon: icon, title: spot.name })
-      .bindPopup(popupHtml(spot), { maxWidth: 300 });
+      .bindPopup(popupHtml(spot), { maxWidth: 320, autoPanPadding: [20, 20] });
   });
 
   // ---- 絞り込み ----
@@ -129,7 +143,8 @@
     if (!state.eras[spot.era]) return false;
     if (spot.year > state.maxYear) return false;
     if (!state.query) return true;
-    var hay = [spot.name, spot.summary, spot.detail, spot.yearLabel].concat(spot.tags).join(" ").toLowerCase();
+    var hay = [spot.name, spot.area, spot.summary, spot.detail, spot.yearLabel]
+      .concat(spot.tags, spot.highlights || []).join(" ").toLowerCase();
     return hay.indexOf(state.query) !== -1;
   }
 
@@ -138,6 +153,8 @@
   var count = document.getElementById("count");
 
   function focusSpot(spot) {
+    // 絞り込みで非表示のスポットでも、年表などから選ばれたら表示する
+    if (!markerLayer.hasLayer(markers[spot.id])) markerLayer.addLayer(markers[spot.id]);
     map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 16));
     markers[spot.id].openPopup();
     if (window.matchMedia("(max-width: 720px)").matches) {
@@ -157,7 +174,7 @@
       li.innerHTML =
         '<span class="bar" style="background:' + ERAS[spot.era].color + '"></span>' +
         "<div><div class=\"name\">" + escapeHtml(spot.name) + "</div>" +
-        '<div class="meta">' + escapeHtml(spot.yearLabel) + "</div>" +
+        '<div class="meta">' + escapeHtml(spot.yearLabel) + (spot.area ? "・" + escapeHtml(spot.area) : "") + "</div>" +
         '<div class="meta">' + escapeHtml(spot.summary) + "</div></div>";
       li.addEventListener("click", function () { focusSpot(spot); });
       li.addEventListener("keydown", function (e) { if (e.key === "Enter") focusSpot(spot); });
@@ -165,6 +182,40 @@
     });
     count.textContent = visible.length + " / " + SPOTS.length + " 件";
   }
+
+  // ---- 年表 ----
+  var spotById = {};
+  SPOTS.forEach(function (s) { spotById[s.id] = s; });
+  var timeline = document.getElementById("timeline");
+  (window.TIMELINE || []).slice().sort(function (a, b) { return a.year - b.year; }).forEach(function (ev) {
+    var li = document.createElement("li");
+    var spot = ev.spot && spotById[ev.spot];
+    if (spot) li.style.setProperty("--dot", ERAS[spot.era].color);
+    li.innerHTML = '<div class="t-year">' + escapeHtml(ev.label) + '</div><div class="t-text">' + escapeHtml(ev.text) + "</div>";
+    if (spot) {
+      li.className = "linked";
+      li.tabIndex = 0;
+      li.title = spot.name + " を地図で見る";
+      li.addEventListener("click", function () { focusSpot(spot); });
+      li.addEventListener("keydown", function (e) { if (e.key === "Enter") focusSpot(spot); });
+    }
+    timeline.appendChild(li);
+  });
+
+  // ---- タブ ----
+  var tabs = [
+    { tab: document.getElementById("tab-spots"), view: document.getElementById("view-spots") },
+    { tab: document.getElementById("tab-timeline"), view: document.getElementById("view-timeline") }
+  ];
+  tabs.forEach(function (t) {
+    t.tab.addEventListener("click", function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.tab.setAttribute("aria-selected", String(on));
+        o.view.hidden = !on;
+      });
+    });
+  });
 
   // ---- スマホ用パネル開閉 ----
   var panel = document.getElementById("panel");
