@@ -3,6 +3,15 @@
 
   var ERAS = window.ERAS;
   var SPOTS = window.SPOTS.slice().sort(function (a, b) { return a.year - b.year; });
+  var DISTRICTS = window.DISTRICTS || [];
+
+  // 各スポットの地域を area の文字列から決める
+  SPOTS.forEach(function (spot) {
+    var d = DISTRICTS.filter(function (d) {
+      return d.keywords.some(function (k) { return (spot.area || "").indexOf(k) !== -1; });
+    })[0];
+    spot.district = d ? d.key : "";
+  });
 
   // ---- 地図 ----
   var map = L.map("map", { zoomControl: true }).setView([35.664, 139.698], 14);
@@ -106,6 +115,7 @@
   var state = {
     eras: Object.keys(ERAS).reduce(function (o, k) { o[k] = true; return o; }, {}),
     query: "",
+    district: "",
     showDark: true,
     onlyDark: false,
     maxYear: Math.max.apply(null, SPOTS.map(function (s) { return s.year; }))
@@ -144,6 +154,25 @@
     render();
   });
 
+  var districtSelect = document.getElementById("district");
+  DISTRICTS.forEach(function (d) {
+    var opt = document.createElement("option");
+    var n = SPOTS.filter(function (s) { return s.district === d.key; }).length;
+    opt.value = d.key;
+    opt.textContent = d.label + "（" + n + "）";
+    districtSelect.appendChild(opt);
+  });
+  districtSelect.addEventListener("change", function () {
+    state.district = districtSelect.value;
+    map.closePopup();
+    render();
+    // 選んだ地域が見えるように地図を合わせる
+    var visible = SPOTS.filter(matches);
+    if (visible.length) {
+      map.fitBounds(L.latLngBounds(visible.map(function (s) { return [s.lat, s.lng]; })), { padding: [40, 40], maxZoom: 16 });
+    }
+  });
+
   var showDark = document.getElementById("show-dark");
   var onlyDark = document.getElementById("only-dark");
   showDark.addEventListener("change", function () {
@@ -159,6 +188,7 @@
 
   function matches(spot) {
     if (!state.eras[spot.era]) return false;
+    if (state.district && spot.district !== state.district) return false;
     if (spot.dark && !state.showDark) return false;
     if (!spot.dark && state.onlyDark) return false;
     if (spot.year > state.maxYear) return false;

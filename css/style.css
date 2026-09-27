@@ -54,7 +54,7 @@ html, body {
 .panel-section { padding: 12px 16px; border-bottom: 1px solid var(--line); }
 .panel-section h2 { margin: 0 0 8px; font-size: .85rem; color: var(--muted); font-weight: 600; }
 
-#search, #old-photo {
+#search, #old-photo, #district {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid var(--line);

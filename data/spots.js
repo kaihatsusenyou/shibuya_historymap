@@ -28,6 +28,21 @@ window.ERAS = {
   modern:   { label: "平成・令和",        color: "#6a1b9a" }
 };
 
+/*
+ * 地域区分（絞り込み用）。各スポットの area に keywords のどれかが含まれれば、その地域に入ります。
+ * 上から順に判定します。
+ */
+window.DISTRICTS = [
+  { key: "harajuku", label: "原宿・表参道・神宮前", keywords: ["原宿", "表参道", "神宮前", "青山"] },
+  { key: "sendagaya", label: "千駄ヶ谷", keywords: ["千駄ヶ谷"] },
+  { key: "west", label: "上原・大山町・初台・幡ヶ谷・笹塚・本町", keywords: ["上原", "大山町", "初台", "幡ヶ谷", "笹塚", "本町", "西原"] },
+  { key: "shoto", label: "松濤・神泉・円山町・南平台", keywords: ["松濤", "神泉", "円山町", "南平台"] },
+  { key: "ebisu", label: "恵比寿・代官山・広尾", keywords: ["恵比寿", "代官山", "猿楽", "鉢山", "広尾"] },
+  { key: "shibuya", label: "渋谷駅周辺・道玄坂・宇田川町", keywords: ["渋谷", "道玄坂", "宇田川", "センター街"] },
+  { key: "yoyogi", label: "代々木・代々木公園・神南・富ヶ谷", keywords: ["代々木", "神南", "富ヶ谷"] },
+  { key: "higashi", label: "東（國學院・氷川神社周辺）", keywords: ["東"] }
+];
+
 window.SPOTS = [
   // ---------------- 原始・古代 ----------------
   {
@@ -300,7 +315,7 @@ window.SPOTS = [
     lat: 35.6717, lng: 139.6949,
     area: "代々木公園",
     summary: "日本で初めて動力飛行機が公式に飛んだ場所。",
-    detail: "陸軍代々木練兵場で、徳川好敏大尉がフランス製の複葉機で高度70m・約3km・4分間の飛行に成功し、同じ日の午後には日野熊蔵大尉もドイツ製の単葉機で飛行しました。1974年、代々木公園内に「日本初飛行の地」の記念碑と二人の胸像が建てられました。",
+    detail: "代々木練兵場は1909年、閉鎖された青山練兵場の代わりとして陸軍刑務所とともに設けられました。この練兵場で、徳川好敏大尉がフランス製の複葉機で高度70m・約3km・4分間の飛行に成功し、同じ日の午後には日野熊蔵大尉もドイツ製の単葉機で飛行しました。1974年、代々木公園内に「日本初飛行の地」の記念碑と二人の胸像が建てられました。",
     highlights: ["記念碑と徳川・日野両大尉の胸像"],
     tags: ["飛行機", "陸軍", "代々木公園"],
     sources: [
@@ -394,10 +409,11 @@ window.SPOTS = [
     lat: 35.6702, lng: 139.7027,
     area: "原宿",
     summary: "尖塔が目印だった都内最古の木造駅舎があった場所。",
-    detail: "1924年に建てられた旧駅舎は、尖塔をのせたハーフティンバー風のデザインで親しまれ、晩年は都内最古の木造駅舎でした。耐火基準を満たさないため2020年3月に新駅舎へ役目を譲り、同年に解体されました。JR東日本は外観を再現した建物を建てるとしています。",
+    detail: "「原宿」は、鎌倉と奥州を結んだ鎌倉街道の宿駅（宿場）に由来し、萱やススキの茂る原っぱだったことから「原」の字がついたとされます。1924年に建てられた旧駅舎は、尖塔をのせたハーフティンバー風のデザインで親しまれ、晩年は都内最古の木造駅舎でした。耐火基準を満たさないため2020年3月に新駅舎へ役目を譲り、同年に解体されました。JR東日本は外観を再現した建物を建てるとしています。",
     tags: ["駅", "建築", "原宿"],
     sources: [
-      { title: "鉄道コム 原宿駅の木造駅舎が再現で復活へ", url: "https://www.tetsudo.com/column/866/" }
+      { title: "鉄道コム 原宿駅の木造駅舎が再現で復活へ", url: "https://www.tetsudo.com/column/866/" },
+      { title: "nippon.com 原宿（JY19）", url: "https://www.nippon.com/ja/japan-topics/c13309/" }
     ]
   },
 
@@ -826,7 +842,7 @@ window.SPOTS = [
     dark: "事故",
     year: 2007,
     yearLabel: "2007年（平成19年）6月19日",
-    lat: 35.6593, lng: 139.6945,
+    lat: 35.6583, lng: 139.6940,
     area: "松濤（位置はおおよそ）",
     summary: "温泉のくみ上げで出た天然ガスが爆発し、従業員3人が亡くなった事故。",
     detail: "女性専用の温泉施設の別棟地下で、温泉水とともに出てきたメタンを主成分とする天然ガスがたまり、機械の火花で引火して爆発しました。従業員3人が亡くなり、通行人を含む3人が重傷を負いました。この事故をきっかけに温泉法が改正され、温泉採取時の可燃性ガス対策が義務づけられました。",
@@ -904,7 +920,401 @@ window.SPOTS = [
       { title: "渋谷文化プロジェクト 渋谷駅地下の雨水貯留施設", url: "https://www.shibuyabunka.com/blog.php?id=1151" }
     ]
   }
-
+,
+  // ---------------- 地域ごとの追加（地名の由来・各町の歴史） ----------------
+  {
+    id: "shibuya-name",
+    name: "「渋谷」の地名の由来",
+    era: "medieval",
+    year: 1100,
+    yearLabel: "諸説あり（定説なし）",
+    lat: 35.6561, lng: 139.7038,
+    area: "渋谷（渋谷川沿い）",
+    summary: "入江の「塩谷の里」説、渋谷氏説、川の色説など、由来には複数の説がある。",
+    detail: "①かつてこの付近が入江で「塩谷（しおや）の里」と呼ばれ、それが「しぶや」に変わったという説、②平安時代末、領主の河崎重家が御所に侵入した賊を捕らえた功で「渋谷」の姓を賜り、領地の名も渋谷になったという説、③川の水が鉄分を含んだ赤さび色（シブ色）だったという説、④渋谷川沿いの低地が「しぼんだ谷」だったという説などがあり、定説はありません。",
+    tags: ["地名", "渋谷川", "渋谷氏"],
+    sources: [
+      { title: "渋谷区 地名の由来", url: "https://www.city.shibuya.tokyo.jp/kusei/shibuyaku/introduction/uraig.html" },
+      { title: "渋谷区立図書館 「渋谷」の名はどこからきたの", url: "https://www.lib.city.shibuya.tokyo.jp/shibuya/about-shibuya/origin-name/" }
+    ]
+  },
+  {
+    id: "hataaraiike",
+    name: "旗洗池跡（幡ヶ谷の地名の由来）",
+    era: "medieval",
+    year: 1087,
+    yearLabel: "伝承（11世紀・後三年の役のあと）",
+    lat: 35.6795, lng: 139.6765,
+    area: "本町（位置はおおよそ）",
+    summary: "源義家が白旗を洗ったという伝説の池。",
+    detail: "後三年の役のあと、京へ向かう源義家がこの池で源氏の白旗を洗い、そばの松にかけて乾かしたという伝説があり、「幡ヶ谷」の地名の由来とされます。池は唐津藩小笠原家の屋敷内にあった小さな湧水池で、1963年に埋め立てられました。現在は1906年にこの地を訪れた東郷平八郎の筆による「洗旗池」の碑だけが残っています。なお義家が本当に旗を洗ったかどうかの証拠はなく、関東に多い源氏伝説の一つです。",
+    highlights: ["東郷平八郎の筆による「洗旗池」の碑"],
+    tags: ["地名", "伝説", "源義家", "幡ヶ谷"],
+    sources: [
+      { title: "シブヤ散歩新聞 渋谷歴史散歩 No.11「笹塚跡」と「旗洗池跡」", url: "http://shibuyasanpokaigi.jp/shinbun/index.php/2018/07/11/history11-sasazuka-and-hataraiike/" }
+    ]
+  },
+  {
+    id: "hatsudai-shoshunji",
+    name: "初台の地名と正春寺",
+    era: "edo",
+    year: 1591,
+    yearLabel: "1591年（天正19年）初台局がこの地を拝領",
+    lat: 35.6812, lng: 139.6948,
+    area: "代々木・初台",
+    summary: "太田道灌の砦と、将軍の乳母「初台局」ゆかりの地。",
+    detail: "「初台」の名は、太田道灌が代々木村に築いた8か所の砦のうち、一の砦（狼煙台）があったことに由来するといわれます。徳川家康の関東入りの直後、二代将軍秀忠の乳母がこの地に200石を拝領して「初台局」と名乗りました。その娘で三代将軍家光の乳母となった梅園局が、母の菩提寺として代々木三丁目に正春寺を建てました。",
+    tags: ["地名", "寺", "太田道灌", "初台"],
+    sources: [
+      { title: "東京さんぽ「初台駅」地名の由来", url: "https://www.jk-tokyo.tv/station/hatudai/" },
+      { title: "シブヤ散歩新聞 渋谷坂散歩 No.14 初台坂", url: "http://shibuyasanpokaigi.jp/shinbun/index.php/2018/11/21/saka14-hatsudaisaka/" }
+    ]
+  },
+  {
+    id: "sasazuka",
+    name: "笹塚跡と甲州街道",
+    era: "edo",
+    year: 1604,
+    yearLabel: "1604年（慶長9年）塚が築かれたと伝わる",
+    lat: 35.6740, lng: 139.6670,
+    area: "笹塚",
+    summary: "甲州街道の一里塚に笹が茂っていたことが地名の由来。",
+    detail: "江戸の五街道の一つ・甲州街道の両側に築かれた塚（盛り土）に笹が生い茂っていたことから「笹塚」と呼ばれるようになったといいます。塚は1604年に大久保長安によって設けられたと伝えられます。1913年には京王電気軌道（現在の京王線）が笹塚〜調布間で開業し、笹塚駅が始発駅となりました。",
+    tags: ["地名", "街道", "甲州街道", "京王線"],
+    sources: [
+      { title: "渋谷区 地名の由来", url: "https://www.city.shibuya.tokyo.jp/kusei/shibuyaku/introduction/uraig.html" },
+      { title: "甲州街道紀行 笹塚跡", url: "https://oldroad.japan-report.com/kosyu/point/list/kosyu160" }
+    ]
+  },
+  {
+    id: "sendagaya-name",
+    name: "「千駄ヶ谷」の地名の由来",
+    era: "edo",
+    year: 1600,
+    yearLabel: "古くからの地名",
+    lat: 35.6812, lng: 139.7110,
+    area: "千駄ヶ谷",
+    summary: "馬1,000頭分の萱（かや）がとれた土地。",
+    detail: "「千駄萱（せんだがや）」が由来といわれます。「一駄」は馬1頭で運べる荷物の量のことで、「千駄萱」は馬1,000頭分もの萱を産する土地という意味です。一帯が萱の生い茂る原野だったことを物語っています。",
+    tags: ["地名", "千駄ヶ谷"],
+    sources: [
+      { title: "nippon.com 原宿（JY19）", url: "https://www.nippon.com/ja/japan-topics/c13309/" }
+    ]
+  },
+  {
+    id: "tomigaya-name",
+    name: "「富ヶ谷」の地名の由来",
+    era: "edo",
+    year: 1700,
+    yearLabel: "江戸時代 代々木村富谷",
+    lat: 35.6672, lng: 139.6905,
+    area: "富ヶ谷",
+    summary: "地下の貝の化石層にちなむ「留貝」が転じたといわれる。",
+    detail: "古くは「留貝（とめがい）」と呼ばれ、富ヶ谷の低地の地下約10mに貝の化石層が広がっていたことに由来するといわれます。のちに縁起をかついで「富谷」となり、江戸時代には代々木村富谷、1932年に代々木富ヶ谷町となりました。",
+    tags: ["地名", "富ヶ谷"],
+    sources: [
+      { title: "渋谷区 地名の由来", url: "https://www.city.shibuya.tokyo.jp/kusei/shibuyaku/introduction/uraig.html" },
+      { title: "東京さんぽ 富ヶ谷の由来", url: "https://www.jk-tokyo.tv/zatsugaku/236/" }
+    ]
+  },
+  {
+    id: "yoyogi-momi",
+    name: "「代々木」の地名の由来となった樅の木",
+    era: "edo",
+    year: 1840,
+    yearLabel: "江戸時代後期（『江戸名所図会』に記載）",
+    lat: 35.6720, lng: 139.6985,
+    area: "代々木（明治神宮内）",
+    summary: "代々受け継がれた大きな樅の木が地名になったといわれる。",
+    detail: "江戸時代、この地には彦根藩井伊家の下屋敷があり、そこに立つ樅の大木が「代々木」の名の由来になったといわれます。片側に馬を3頭つなぐと反対側から見えなくなるほどの大木で、幕末には井伊家の家臣が木に登って品川沖の外国船を見張ったという話も伝わります。初代の木は枯れましたが、明治神宮の南参道近くに二代目の樅と説明板があります。",
+    highlights: ["明治神宮内の二代目の樅と説明板"],
+    tags: ["地名", "代々木", "井伊家", "明治神宮"],
+    sources: [
+      { title: "nippon.com 代々木（JY18）", url: "https://www.nippon.com/ja/japan-topics/c13310/" }
+    ]
+  },
+  {
+    id: "shinsen-kobo",
+    name: "神泉と弘法湯跡",
+    era: "edo",
+    year: 1800,
+    yearLabel: "江戸時代後期〜",
+    lat: 35.6560, lng: 139.6928,
+    area: "神泉町・円山町",
+    summary: "仙人の霊水伝説と、大山詣での人々が立ち寄った湯。",
+    detail: "神泉の地名は、この谷に湧いた水が空鉢仙人ゆかりの霊水「神仙水」と呼ばれたことに由来します（近くの鉢山町の名も同じ仙人にちなむとされます）。のちに弘法大師が湧かせた泉だとする話も広まり、江戸後期には村の共同浴場「弘法湯」ができました。大山詣でや富士講の人々が行き帰りに立ち寄る休憩所としてにぎわいました。",
+    highlights: ["弘法湯の石碑"],
+    tags: ["地名", "湧水", "銭湯", "大山詣で"],
+    sources: [
+      { title: "SCAPE WORKS 弘法湯石碑", url: "https://www.scapeworks.jp/soundwalk03.html" },
+      { title: "東京さんぽ 町の由来「渋谷編（2）」", url: "https://www.jk-tokyo.tv/zatsugaku/130/" }
+    ]
+  },
+  {
+    id: "tokiwamatsu",
+    name: "常盤松の碑と常陸宮邸（常盤松御用邸）",
+    era: "edo",
+    year: 1856,
+    yearLabel: "1855年 薩摩藩の屋敷に／1856年 篤姫が江戸城へ",
+    lat: 35.6555, lng: 139.7080,
+    area: "東",
+    summary: "常盤御前の手植えと伝わる松と、篤姫が江戸城へ嫁いだ屋敷の跡。",
+    detail: "源義朝の側室・常盤御前が植えたと伝わる古い松があり、地名「常磐松」の由来となりました。松は1945年5月25日の空襲で被害を受けましたが、植え直された松が「常盤松の碑」のそばにあります。すぐ近くの常盤松御用邸（常陸宮邸）の地は、1855年から薩摩藩の屋敷となり、翌年、篤姫がここから十三代将軍徳川家定のもとへ輿入れしました。1966年の住居表示で、町名は「東」に変わりました。",
+    highlights: ["常盤松の碑"],
+    tags: ["地名", "伝説", "篤姫", "空襲"],
+    sources: [
+      { title: "シブヤ散歩新聞 渋谷歴史散歩 No.5 常盤松の碑", url: "http://shibuyasanpokaigi.jp/shinbun/index.php/2017/05/15/history5-tokiwamatumonument/" }
+    ]
+  },
+  {
+    id: "sendagaya-goten",
+    name: "徳川宗家の「千駄ヶ谷御殿」跡",
+    era: "meiji",
+    year: 1877,
+    yearLabel: "1877年（明治10年）〜1943年",
+    lat: 35.6795, lng: 139.7120,
+    area: "千駄ヶ谷",
+    summary: "江戸幕府を継いだ徳川宗家の10万坪を超える屋敷。",
+    detail: "徳川家達（いえさと）は1877年から千駄ヶ谷に住み、現在の千駄ケ谷駅の南側一帯に10万坪を超える屋敷を構えました。洋館の公爵邸は「千駄ヶ谷御殿」と呼ばれました。1943年に東京府が買い取り、戦後、跡地には東京体育館が建てられました。津田塾大学千駄ヶ谷キャンパスなども、かつての屋敷の一帯にあります。",
+    tags: ["徳川家", "屋敷", "千駄ヶ谷"],
+    sources: [
+      { title: "遠藤潔 千駄ヶ谷 德川宗家本邸", url: "http://www.kiyoshi-endo.com/information/detail.php?id=862" }
+    ]
+  },
+  {
+    id: "maruyamacho-kagai",
+    name: "円山町の花街",
+    era: "meiji",
+    year: 1887,
+    yearLabel: "1887年頃〜／1913年 三業地に指定",
+    lat: 35.6572, lng: 139.6955,
+    area: "円山町",
+    summary: "弘法湯の前の芸者屋から始まった、渋谷の花街。",
+    detail: "1887年頃、弘法湯の前に芸者屋「宝屋」が開業したのが始まりとされます。1913年には芸妓置屋24戸・芸妓60名・待合茶屋13戸を抱える三業地に指定され、花街として栄えました。現在はホテル街・ライブハウス街となっていますが、料亭の名残や石畳の路地に当時の面影が残ります。",
+    tags: ["花街", "芸者", "円山町"],
+    sources: [
+      { title: "東京花柳界情報舎 円山町", url: "https://www.tokyo-geisha.com/html/kagai/maruyamachou.php" },
+      { title: "TRiP EDiTOR かつての花街・円山町", url: "https://tripeditor.com/7841" }
+    ]
+  },
+  {
+    id: "jrc-hospital",
+    name: "日本赤十字社医療センター",
+    era: "meiji",
+    year: 1891,
+    yearLabel: "1891年（明治24年）広尾へ移転",
+    lat: 35.6528, lng: 139.7180,
+    area: "広尾",
+    summary: "日本赤十字社の最初の病院。",
+    detail: "1886年に麹町区飯田町に開設された博愛社病院が前身で、1891年に現在の広尾（当時は南豊島郡）へ移転しました。以来、日本赤十字社の中核病院となっています。",
+    tags: ["病院", "赤十字", "広尾"],
+    sources: [
+      { title: "日本赤十字社医療センター 沿革・歴史", url: "https://www.med.jrc.or.jp/hospital/tabid/105/Default.aspx" }
+    ]
+  },
+  {
+    id: "kuninomiya",
+    name: "旧久邇宮邸（聖心女子大学）",
+    era: "meiji",
+    year: 1924,
+    yearLabel: "1918年 本邸完成／1924年 御常御殿",
+    lat: 35.6485, lng: 139.7225,
+    area: "広尾",
+    summary: "宮家の本邸として唯一現存する和風の御殿。",
+    detail: "久邇宮家第2代・邦彦王の本邸で、1918年に完成しました。戦災で一部を失いましたが、1924年完成の御常御殿などが残り、1947年に聖心女子大学の校地となりました。和風を基調とした宮家本邸の唯一の現存例として、国の重要文化財に指定されています。",
+    highlights: ["「パレス」と呼ばれる御常御殿（公開日あり）"],
+    tags: ["重要文化財", "皇族", "大学", "広尾"],
+    sources: [
+      { title: "聖心女子大学 重要文化財 旧久邇宮邸", url: "https://www.u-sacred-heart.ac.jp/assets/images/about/campus/palace_ja.pdf" }
+    ]
+  },
+  {
+    id: "hyakkendana",
+    name: "百軒店",
+    era: "meiji",
+    year: 1924,
+    yearLabel: "1924年（大正13年）開業",
+    lat: 35.6588, lng: 139.6963,
+    area: "道玄坂",
+    summary: "関東大震災で被災した下町の名店を集めた商店街。",
+    detail: "西武の前身・箱根土地の堤康次郎が旧中川伯爵邸の土地を開発し、前年の関東大震災で被災した下町の名店を誘致しました。劇場や映画館、上野精養軒、資生堂など117店が並び、渋谷の繁華街の原点の一つとなりました。1945年の空襲で焼失し、戦後はジャズ喫茶などが集まる街として再生しました。",
+    tags: ["商店街", "震災復興", "道玄坂"],
+    sources: [
+      { title: "百軒店商店街 百軒店商店街とは", url: "https://hyakkendana.com/history/" }
+    ]
+  },
+  {
+    id: "odakyu-sanguubashi",
+    name: "参宮橋駅と小田急線の開業",
+    era: "prewar",
+    year: 1927,
+    yearLabel: "1927年（昭和2年）4月1日開業",
+    lat: 35.6783, lng: 139.6937,
+    area: "代々木",
+    summary: "明治神宮へ参拝する橋の名を持つ駅。",
+    detail: "小田原急行鉄道（現在の小田急電鉄）が新宿〜小田原間を一度に開業した日に、参宮橋・代々木八幡・代々木上原などの駅も開業しました。開業当時、参宮橋〜代々木八幡の間には代々木練兵場が広がり、周辺は軍の施設に囲まれていました。",
+    tags: ["鉄道", "小田急", "駅"],
+    sources: [
+      { title: "このまちアーカイブス 小田急小田原線 沿線の歴史散策", url: "https://smtrc.jp/railway/line/odakyu-odawarasen/index.html" }
+    ]
+  },
+  {
+    id: "koibumi-yokocho",
+    name: "恋文横丁跡（戦後の闇市）",
+    era: "postwar",
+    year: 1948,
+    yearLabel: "1948年頃〜",
+    lat: 35.6589, lng: 139.6979,
+    area: "道玄坂",
+    summary: "米兵への恋文を代筆・翻訳する店があった闇市の横丁。",
+    detail: "空襲で焼け野原になった渋谷では、道玄坂と文化村通りにはさまれた一帯にバラックが建ち並び、闇市ができました。1948年、英語が堪能な元軍人がここで、日本人女性から米兵への恋文の代筆・翻訳を始めました。これを題材にした丹羽文雄の小説『恋文』が1953年に映画化されて評判となり、「恋文横丁」と呼ばれるようになりました。",
+    highlights: ["「恋文横丁此処にありき」の標柱"],
+    tags: ["闇市", "戦後", "占領期", "道玄坂"],
+    sources: [
+      { title: "テレビ東京 アド街ック天国 恋文横丁此処にありき", url: "https://www.tv-tokyo.co.jp/adomachi/backnumber/20240330/144775.html" },
+      { title: "シブテナ 渋谷に存在した「恋文横丁」を紐解く", url: "https://shibutena.com/local_information/10556/" }
+    ]
+  },
+  {
+    id: "nanpeidai-anpo",
+    name: "南平台の岸首相邸と安保闘争",
+    era: "postwar",
+    dark: "社会運動",
+    year: 1960,
+    yearLabel: "1960年（昭和35年）6月",
+    lat: 35.6552, lng: 139.6960,
+    area: "南平台町",
+    summary: "日米安保条約に反対するデモ隊が首相の私邸に押し寄せた。",
+    detail: "南平台（道玄坂を上った高台の平地にあることが地名の由来とされます）には岸信介首相の私邸がありました。1960年6月、日米安保条約の改定に反対する学生や労働者の大群が岸邸を目指し、周辺の道路を埋め尽くして門が押し破られることもありました。条約は強行採決を経て成立し、岸内閣は混乱の責任をとって総辞職しました。",
+    tags: ["安保闘争", "デモ", "政治", "南平台"],
+    sources: [
+      { title: "日本記者クラブ 戦後政治の分岐点―60年安保騒動", url: "https://www.jnpc.or.jp/journal/interviews/11912" },
+      { title: "渋谷文化プロジェクト 南平台エリア", url: "https://www.shibuyabunka.com/area.php?id=12" }
+    ]
+  },
+  {
+    id: "shibuya-kokaido",
+    name: "渋谷公会堂と渋谷区役所",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年（昭和39年）竣工／2019年 建て替え",
+    lat: 35.6643, lng: 139.6982,
+    area: "宇田川町（旧陸軍刑務所跡）",
+    summary: "東京オリンピックの重量挙げ会場となった公会堂。",
+    detail: "区の総合庁舎とともに1964年に完成し、東京オリンピックの重量挙げ会場となりました。ここで三宅義信選手が日本選手団の金メダル第1号を獲得しています。その後は「ロックの殿堂」と呼ばれるコンサート会場として親しまれました。耐震性の問題で2015年に閉館し、2019年に新しい区役所とともに建て替えられ「LINE CUBE SHIBUYA」として再開しました。",
+    tags: ["オリンピック", "音楽", "区役所"],
+    sources: [
+      { title: "JOC 渋谷公会堂", url: "https://www.joc.or.jp/past_games/tokyo1964/memorialplace/5.html" },
+      { title: "シブヤ経済新聞 渋谷公会堂、10月開業へ", url: "https://www.shibukei.com/headline/14121/" }
+    ]
+  },
+  {
+    id: "udagawa",
+    name: "宇田川の暗渠",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年頃までに暗渠化",
+    lat: 35.6628, lng: 139.6962,
+    area: "宇田川町",
+    summary: "センター街や井の頭通りの下を流れる、宇田川町の名の由来の川。",
+    detail: "宇田川は代々木・初台・西原・大山町・上原あたりを水源とする渋谷川の支流で、一帯の田畑を潤していました。豪雨のたびに水害を起こしたため昭和初期から護岸工事が進み、1964年の東京オリンピックを前に暗渠化されて下水道となりました。今も蛇行する道や護岸の跡に川の名残が見られます。",
+    tags: ["川", "暗渠", "地名", "水害"],
+    sources: [
+      { title: "CBCマガジン 東京・渋谷の暗渠道を巡る旅", url: "https://hicbc.com/magazine/article/?id=michi-column-26032401" }
+    ]
+  },
+  {
+    id: "nhk",
+    name: "NHK放送センター",
+    era: "postwar",
+    year: 1965,
+    yearLabel: "1965年 第1期完成／1973年 本部機能を移転",
+    lat: 35.6645, lng: 139.6955,
+    area: "神南",
+    summary: "ワシントンハイツの返還地に建てられた放送の拠点。",
+    detail: "1964年に返還されたワシントンハイツの跡地の一部に建設され、1965年に第1期工事が完成しました。1973年7月に日比谷の旧放送会館での業務が終わり、本部機能が渋谷に移りました。",
+    tags: ["放送", "ワシントンハイツ", "神南"],
+    sources: [
+      { title: "清水建設 NHK放送センター・NHKホール", url: "https://www.shimz.co.jp/works/jp_off_197303_nhk_hall.html" }
+    ]
+  },
+  {
+    id: "kanze-nohgakudo",
+    name: "観世能楽堂跡",
+    era: "postwar",
+    year: 1972,
+    yearLabel: "1972年〜2015年",
+    lat: 35.6600, lng: 139.6936,
+    area: "松濤（旧鍋島邸跡）",
+    summary: "43年間、松濤にあった観世流の能楽堂。",
+    detail: "1972年、旧鍋島邸の跡地に552席の観世能楽堂が建てられました。老朽化などのため2015年に閉場し、2017年に銀座のGINZA SIXへ移りました。",
+    tags: ["能楽", "伝統芸能", "松濤"],
+    sources: [
+      { title: "シブヤ経済新聞 松濤の「観世能楽堂」閉場", url: "https://www.shibukei.com/headline/10753/" }
+    ]
+  },
+  {
+    id: "scramble",
+    name: "渋谷スクランブル交差点",
+    era: "postwar",
+    year: 1973,
+    yearLabel: "1973年（昭和48年）スクランブル化",
+    lat: 35.6595, lng: 139.7005,
+    area: "渋谷",
+    summary: "世界で最も有名な交差点の一つ。",
+    detail: "1960年代以降、百貨店の開業や1973年の渋谷パルコ開業で人出が急増したことから、安全のためにスクランブル化されました（国内では新宿駅東口などが先行）。1回の青信号で多い時は3,000人以上が渡り、1日の通行量は平日で約26万人、休日で約39万人といわれます。",
+    tags: ["交差点", "観光", "渋谷駅"],
+    sources: [
+      { title: "渋谷新聞 スクランブル交差点の豆知識", url: "https://shibuya-shimbun.com/archives/190" }
+    ]
+  },
+  {
+    id: "shogi-kaikan",
+    name: "将棋会館（旧会館）",
+    era: "postwar",
+    year: 1976,
+    yearLabel: "1976年 竣工／2024年 新会館へ移転",
+    lat: 35.6795, lng: 139.7072,
+    area: "千駄ヶ谷",
+    summary: "「将棋の街・千駄ヶ谷」の象徴だった日本将棋連盟の本部。",
+    detail: "1976年に完成した日本将棋連盟の本部で、数々のタイトル戦や公式戦が行われ、千駄ヶ谷は「将棋の街」として知られるようになりました。2024年、近くに完成した新しい将棋会館へ本部機能が移りました。",
+    tags: ["将棋", "千駄ヶ谷"],
+    sources: [
+      { title: "日本将棋連盟 東京・将棋会館", url: "https://www.shogi.or.jp/about/base/tokyo/" }
+    ]
+  },
+  {
+    id: "enzai-1997",
+    name: "円山町の未解決殺人事件と冤罪",
+    era: "modern",
+    dark: "事件",
+    year: 1997,
+    yearLabel: "1997年（平成9年）3月／2012年 再審無罪",
+    lat: 35.6579, lng: 139.6962,
+    area: "円山町（位置は地域の目安）",
+    summary: "逮捕・服役した男性が15年後に無罪となった冤罪事件。真犯人は不明のまま。",
+    detail: "1997年3月、円山町のアパートで会社員の女性が殺害されました。近くに住んでいた外国人男性が逮捕され、一審は無罪でしたが控訴審で無期懲役となり確定しました。男性は一貫して無実を訴え、2012年、現場に残された証拠から別人のDNAが検出されたことなどを受けて再審で無罪となりました。捜査と裁判のあり方が問われた冤罪事件として知られ、事件そのものは未解決です。",
+    tags: ["事件", "冤罪", "再審", "未解決"],
+    sources: [
+      { title: "日本大百科全書（ジャパンナレッジ）", url: "https://japanknowledge.com/contents/nipponica/sample_koumoku.html?entryid=183" },
+      { title: "冤罪マップ（1997）無罪確定", url: "https://enzai-map.com/cases/todeno/" }
+    ]
+  },
+  {
+    id: "new-national-theatre",
+    name: "新国立劇場と東京オペラシティ",
+    era: "modern",
+    year: 1997,
+    yearLabel: "1997年（平成9年）10月開場",
+    lat: 35.6830, lng: 139.6865,
+    area: "本町・初台",
+    summary: "オペラ・バレエ・演劇のための国立劇場。",
+    detail: "文化庁が建設した国立の劇場で、オペラ・バレエ・現代舞踊・演劇を上演します。隣接する東京オペラシティとあわせて「東京オペラシティ街区」として一体的に開発されました。",
+    tags: ["劇場", "オペラ", "初台"],
+    sources: [
+      { title: "新国立劇場 沿革", url: "https://www.nntt.jac.go.jp/about/foundation/history.html" }
+    ]
+  }
 ];
 
 /*
@@ -916,6 +1326,31 @@ window.SPOTS = [
  *   dark   : 事件・事故・災害などの出来事なら true
  */
 window.TIMELINE = [
+  { year: 1087,  label: "11世紀（伝承）", text: "源義家が旗洗池で白旗を洗ったという伝説（幡ヶ谷の由来）", spot: "hataaraiike" },
+  { year: 1591,  label: "1591年", text: "秀忠の乳母が初台の地を拝領し「初台局」と名乗る", spot: "hatsudai-shoshunji" },
+  { year: 1604,  label: "1604年", text: "甲州街道に塚が築かれたと伝わる（笹塚の由来）", spot: "sasazuka" },
+  { year: 1856,  label: "1856年", text: "篤姫が渋谷の薩摩藩屋敷から江戸城へ輿入れ", spot: "tokiwamatsu" },
+  { year: 1877,  label: "1877年", text: "徳川家達が千駄ヶ谷に屋敷を構える（千駄ヶ谷御殿）", spot: "sendagaya-goten" },
+  { year: 1887,  label: "1887年頃", text: "円山町に芸者屋が開業し、花街が始まる", spot: "maruyamacho-kagai" },
+  { year: 1891,  label: "1891年", text: "日本赤十字社の病院が広尾へ移転", spot: "jrc-hospital" },
+  { year: 1909.5, label: "1909年", text: "代々木練兵場と陸軍刑務所が設けられる", spot: "yoyogi-first-flight" },
+  { year: 1913,  label: "1913年", text: "京王電気軌道が笹塚〜調布間で開業。円山町が三業地に指定", spot: "sasazuka" },
+  { year: 1918,  label: "1918年", text: "久邇宮邸（現・聖心女子大学）完成", spot: "kuninomiya" },
+  { year: 1924.5, label: "1924年", text: "堤康次郎が道玄坂に百軒店を開く", spot: "hyakkendana" },
+  { year: 1927.5, label: "1927年4月1日", text: "小田急線開業。参宮橋・代々木八幡・代々木上原駅ができる", spot: "odakyu-sanguubashi" },
+  { year: 1948.5, label: "1948年頃", text: "道玄坂下の闇市に「恋文横丁」が生まれる", spot: "koibumi-yokocho" },
+  { year: 1960,  label: "1960年6月", text: "安保闘争のデモ隊が南平台の岸首相邸に押し寄せる", spot: "nanpeidai-anpo", dark: true },
+  { year: 1963,  label: "1963年", text: "幡ヶ谷の地名の由来・旗洗池が埋め立てられる", spot: "hataaraiike" },
+  { year: 1964.5, label: "1964年", text: "渋谷公会堂・区役所完成。公会堂は東京五輪の重量挙げ会場に", spot: "shibuya-kokaido" },
+  { year: 1966.5, label: "1966年", text: "住居表示の実施で常磐松町などが「東」に", spot: "tokiwamatsu" },
+  { year: 1972,  label: "1972年", text: "松濤に観世能楽堂が開場（2015年閉場）", spot: "kanze-nohgakudo" },
+  { year: 1973.5, label: "1973年", text: "渋谷駅前交差点がスクランブル化。NHKの本部機能が渋谷へ", spot: "scramble" },
+  { year: 1976,  label: "1976年", text: "千駄ヶ谷に将棋会館完成", spot: "shogi-kaikan" },
+  { year: 1997,  label: "1997年3月", text: "円山町で殺人事件（のちに冤罪が判明、未解決）", spot: "enzai-1997", dark: true },
+  { year: 1997.5, label: "1997年10月", text: "新国立劇場開場", spot: "new-national-theatre" },
+  { year: 2012.5, label: "2012年", text: "1997年の円山町の事件で服役していた男性が再審無罪に", spot: "enzai-1997", dark: true },
+  { year: 2019,  label: "2019年", text: "新区役所の使用開始、渋谷公会堂が「LINE CUBE SHIBUYA」として再開", spot: "shibuya-kokaido" },
+  { year: 2024,  label: "2024年", text: "将棋会館が新会館へ移転。路上飲酒の禁止が通年に", spot: "shogi-kaikan" },
   { year: 1923,  label: "1923年9月1日", text: "関東大震災。渋谷など山の手は比較的被害が少なく、その後住宅地として発展する", dark: true },
   { year: 1945,  label: "1945年4月14日", text: "空襲で明治神宮の本殿・拝殿が焼失（1958年再建）", spot: "meiji-jingu", dark: true },
   { year: 1945.4, label: "1945年5月25日", text: "東京陸軍刑務所で米軍捕虜62人が焼死", spot: "pow-fire", dark: true },
