@@ -77,6 +77,7 @@
       (spot.area ? '<span class="area">' + escapeHtml(spot.area) + "</span>" : "") +
       "<h3>" + escapeHtml(spot.name) + "</h3>" +
       '<div class="year">' + escapeHtml(spot.yearLabel) + "</div>" +
+      (spot.wiki ? '<figure class="photo" data-spot="' + escapeHtml(spot.id) + '"></figure>' : "") +
       "<p>" + escapeHtml(spot.detail) + "</p>";
     if (spot.highlights && spot.highlights.length) {
       html += "<h4>見どころ</h4><ul>" + spot.highlights.map(function (h) {
@@ -95,6 +96,75 @@
     return html;
   }
 
+  // ポップアップの中身はスポットごとに一度だけ作る（写真を読み込んだ後も消えないように）
+  function popupElement(spot) {
+    var el = document.createElement("div");
+    el.innerHTML = popupHtml(spot);
+    return el;
+  }
+
+  // ---- 写真（Wikipedia の記事に使われているウィキメディア・コモンズの画像） ----
+  var photoCache = {};
+
+  function commonsFilePage(url) {
+    // .../wikipedia/commons/thumb/a/ab/Name.jpg/320px-Name.jpg → File:Name.jpg
+    var m = url.match(/\/wikipedia\/commons\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/]+)/);
+    return m ? "https://commons.wikimedia.org/wiki/File:" + m[1] : null;
+  }
+
+  function fetchPhoto(titles) {
+    if (!titles.length) return Promise.resolve(null);
+    var title = titles[0];
+    var url = "https://ja.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title.replace(/ /g, "_"));
+    return fetch(url)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; })
+      .then(function (data) {
+        var thumb = data && data.thumbnail && data.thumbnail.source;
+        // コモンズの画像（自由に再利用できるもの）だけを使う
+        var filePage = thumb && commonsFilePage(thumb);
+        if (filePage) {
+          return {
+            src: thumb,
+            filePage: filePage,
+            article: (data.content_urls && data.content_urls.desktop && data.content_urls.desktop.page) ||
+              "https://ja.wikipedia.org/wiki/" + encodeURIComponent(title)
+          };
+        }
+        return fetchPhoto(titles.slice(1));
+      });
+  }
+
+  function loadPhoto(spot, container) {
+    if (container.getAttribute("data-loaded")) return;
+    container.setAttribute("data-loaded", "1");
+    if (!photoCache[spot.id]) photoCache[spot.id] = fetchPhoto(spot.wiki);
+    container.innerHTML = '<div class="photo-loading">写真を読み込み中…</div>';
+    photoCache[spot.id].then(function (photo) {
+      if (!photo) { container.remove(); return; }
+      container.innerHTML =
+        '<a href="' + escapeHtml(photo.filePage) + '" target="_blank" rel="noopener">' +
+        '<img src="' + escapeHtml(photo.src) + '" alt="' + escapeHtml(spot.name) + 'の写真" loading="lazy"></a>' +
+        '<figcaption>写真：<a href="' + escapeHtml(photo.filePage) + '" target="_blank" rel="noopener">Wikimedia Commons（作者・ライセンス）</a>' +
+        '／<a href="' + escapeHtml(photo.article) + '" target="_blank" rel="noopener">Wikipediaで詳しく</a></figcaption>';
+      var img = container.querySelector("img");
+      img.addEventListener("load", function () { if (popupSpot === spot) markers[spot.id].getPopup().update(); });
+      img.addEventListener("error", function () { container.remove(); });
+    });
+  }
+
+  var popupSpot = null;
+  map.on("popupopen", function (e) {
+    var el = e.popup.getElement().querySelector(".photo");
+    popupSpot = null;
+    if (!el) return;
+    var spot = SPOTS.filter(function (s) { return s.id === el.getAttribute("data-spot"); })[0];
+    if (!spot) return;
+    popupSpot = spot;
+    loadPhoto(spot, el);
+  });
+  map.on("popupclose", function () { popupSpot = null; });
+
   var markerLayer = L.featureGroup().addTo(map);
   var markers = {};
   SPOTS.forEach(function (spot) {
@@ -108,7 +178,7 @@
       popupAnchor: [0, -10]
     });
     markers[spot.id] = L.marker([spot.lat, spot.lng], { icon: icon, title: spot.name })
-      .bindPopup(popupHtml(spot), { maxWidth: 320, autoPanPadding: [20, 20] });
+      .bindPopup(popupElement(spot), { maxWidth: 320, autoPanPadding: [20, 20] });
   });
 
   // ---- 絞り込み ----
