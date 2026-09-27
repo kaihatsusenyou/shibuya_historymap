@@ -1065,10 +1065,29 @@ var SPOTS = [
     sources: [
       { title: "GO TOKYO 昭和館", url: "https://www.gotokyo.org/jp/spot/646/index.html" }
     ]
+  },
+  {
+    id: "toranomon-jiken",
+    name: "虎ノ門事件（摂政宮狙撃事件）",
+    era: "meiji",
+    dark: "事件",
+    year: 1923.9,
+    yearLabel: "1923年（大正12年）12月27日",
+    lat: 35.6700, lng: 139.7505,
+    area: "霞が関（虎ノ門の交差点付近、位置はおおよそ）",
+    summary: "議会へ向かう途中の摂政宮（のちの昭和天皇）が狙撃された暗殺未遂事件。",
+    detail: "帝国議会の開院式に向かう摂政宮裕仁親王の車が虎ノ門にさしかかったとき、無政府主義者の青年がステッキに仕込んだ銃で狙撃しました。弾は車の窓を貫きましたが摂政宮は無事で、同乗の侍従長が軽傷を負いました。関東大震災の直後に相次いだテロ事件の一つで、山本権兵衛内閣は責任をとって総辞職しました。現場は当時の麹町区（現在の千代田区）です。",
+    tags: ["事件", "テロ", "皇室"],
+    wiki: ["虎ノ門事件"],
+    sources: [
+      { title: "コトバンク 虎ノ門事件", url: "https://kotobank.jp/word/%E8%99%8E%E3%81%AE%E9%96%80%E4%BA%8B%E4%BB%B6-1190568" },
+      { title: "中国新聞 虎ノ門事件 摂政宮狙撃", url: "https://www.chugoku-np.co.jp/articles/-/327350" }
+    ]
   }
 ];
 
 var TIMELINE = [
+  { year: 1923.9, label: "1923年12月27日", text: "虎ノ門事件。摂政宮が狙撃される", spot: "toranomon-jiken", dark: true },
   { year: 1600, label: "慶長年間", text: "織田有楽斎の屋敷跡「有楽原」（有楽町の由来）", spot: "yurakucho-name" },
   { year: 1610, label: "江戸時代初期", text: "江戸城の西を守る大番組が住み「番町」が生まれる", spot: "banchou" },
   { year: 1636, label: "1636年", text: "田安門が建てられる（江戸城に現存する最古の建物）", spot: "tayasumon" },
