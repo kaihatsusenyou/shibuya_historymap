@@ -1852,6 +1852,127 @@ window.SPOTS = [
       { title: "渋谷区 渋谷区パートナーシップ証明", url: "https://www.city.shibuya.tokyo.jp/kusei/shisaku/lgbt/partnership.html" },
       { title: "日本経済新聞 「同性婚」に証明書 東京・渋谷区、全国初の条例成立", url: "https://www.nikkei.com/article/DGXLASDG31H7P_R30C15A3CZ8000/" }
     ]
+  },
+  // ---------------- 負の歴史（第3弾） ----------------
+  {
+    id: "senzai-shibuya",
+    name: "渋谷区の空襲被害（区全体）",
+    era: "prewar",
+    dark: "戦争",
+    year: 1945,
+    yearLabel: "1944年11月27日〜1945年5月29日",
+    lat: 35.6605, lng: 139.7010,
+    area: "渋谷（区全体の被害）",
+    summary: "12回の空襲で1,140人が亡くなり、区の大半が焼け野原になった。",
+    detail: "渋谷区は1944年11月から1945年5月までに12回の空襲を受けました。特に5月24日と25日の山の手大空襲では、多数のB29が大量の焼夷弾を投下しました。区全体の被害は死者1,140人、負傷者5,680人、被災者21万2,120人、焼失などの家屋5万6,700戸にのぼり、終戦時の渋谷駅周辺は一面の焼け野原でした。",
+    tags: ["戦争", "空襲", "戦災"],
+    sources: [
+      { title: "総務省 渋谷区における戦災の状況", url: "https://www.soumu.go.jp/main_sosiki/daijinkanbou/sensai/situation/state/kanto_15.html" },
+      { title: "渋谷区立図書館 戦争の記憶を伝える一冊", url: "https://www.lib.city.shibuya.tokyo.jp/shibuya/shibuya-more/memories-ofwar/" }
+    ]
+  },
+  {
+    id: "tatemono-sokai",
+    name: "渋谷駅前の建物疎開",
+    era: "prewar",
+    dark: "戦争",
+    year: 1944,
+    yearLabel: "1944年（昭和19年）2月",
+    lat: 35.6597, lng: 139.7018,
+    area: "渋谷駅前",
+    summary: "空襲の延焼を防ぐため、駅前の家や店が命令で取り壊された。",
+    detail: "1944年に入ると、東京では空襲による火災の広がりを防ぐため、建物を強制的に取り壊して空き地をつくる「建物疎開」が始まりました。渋谷駅前でも同年2月、対象地区の住民が一斉に引っ越し、住み慣れた家や商店が取り壊されました。同じ年、ハチ公の初代銅像も金属回収で失われています。",
+    tags: ["戦争", "建物疎開", "渋谷駅"],
+    sources: [
+      { title: "東急 戦前の活気取り戻す渋谷", url: "https://www.tokyu.co.jp/history/chapter02_2_1/" },
+      { title: "昭和館 建物疎開ってなあに？", url: "https://www.showakan.go.jp/blog/tosho20240508-01/" }
+    ]
+  },
+  {
+    id: "shibuyagawa-pollution",
+    name: "「ドブ川」になった渋谷川と暗渠化",
+    era: "postwar",
+    dark: "環境問題",
+    year: 1961,
+    yearLabel: "戦後〜1961年 駅周辺を暗渠化／1970年 支流もほぼすべて",
+    lat: 35.6600, lng: 139.7030,
+    area: "渋谷（渋谷川）",
+    summary: "「春の小川」の清流は、戦後の排水でドブ川になり、ふたをされて姿を消した。",
+    detail: "戦後、渋谷川には生活排水や産業排水が流れ込み、悪臭を放つ「ドブ川」になりました。高度経済成長期に次々とふたがされ、1961年には東急東横店から稲荷橋の間が暗渠となり、上流の穏田川・宇田川も同じ頃に下水道に変わりました。1970年までに支流のほぼすべてが暗渠化されています。駅の下流部の暗渠化には、下水道整備だけでなく、清掃工場の受け入れとの交換条件など政策的な判断もあったと指摘されています。",
+    tags: ["環境", "川", "暗渠", "高度経済成長"],
+    wiki: ["渋谷川"],
+    sources: [
+      { title: "まっぷるウェブ 渋谷川が再び川として蘇る", url: "https://articles.mapple.net/bk/23536/" },
+      { title: "東京都立大学 渋谷川の暗渠化計画に関する一考察", url: "https://akira.fpark.tmu.ac.jp/paperlist/lecpaper/263.pdf" }
+    ]
+  },
+  {
+    id: "seisou-kojo",
+    name: "渋谷清掃工場",
+    era: "modern",
+    year: 2001,
+    yearLabel: "2001年（平成13年）完成",
+    lat: 35.6532, lng: 139.7055,
+    area: "東",
+    summary: "山手線の内側で唯一のごみ焼却工場。",
+    detail: "2001年に完成したごみ焼却工場で、JR山手線の内側にある唯一の清掃工場です。住宅地の近くにあるため臭いが漏れない対策がとられ、ごみを燃やした熱で発電して余った電気を売っています。",
+    tags: ["環境", "ごみ", "インフラ"],
+    sources: [
+      { title: "東京二十三区清掃一部事務組合 渋谷清掃工場", url: "https://www.union.tokyo23-seisou.lg.jp/kojo/shibuya/index.html" },
+      { title: "アーバンライフ東京 渋谷駅から徒歩5分 そびえ立つ清掃工場", url: "https://urbanlife.tokyo/post/3748/" }
+    ]
+  },
+  {
+    id: "earthquake-2011",
+    name: "東日本大震災と帰宅困難者",
+    era: "modern",
+    dark: "災害",
+    year: 2011,
+    yearLabel: "2011年（平成23年）3月11日",
+    lat: 35.6608, lng: 139.7100,
+    area: "渋谷（青山学院）",
+    summary: "電車が止まり、渋谷にも帰れない人があふれた夜。",
+    detail: "東日本大震災の日、首都圏の鉄道が止まり、東京都内だけで約352万人が当日帰宅できなくなりました。渋谷駅周辺にも大勢の人があふれ、青山学院はその夜から翌朝まで約8,000人を受け入れて、水や食料、防寒具を配りました。これをきっかけに、渋谷区では青山学院大学や代々木公園を一時退避場所とするなど、帰宅困難者対策が進められています。",
+    tags: ["災害", "地震", "帰宅困難者", "防災"],
+    sources: [
+      { title: "青山学院 帰宅困難者の受け入れ", url: "https://www.aoyamagakuin.jp/practice/cooperation/accept.html" },
+      { title: "渋谷区 帰宅困難者対策", url: "https://www.city.shibuya.tokyo.jp/bosai/bosai/bosai-shisetsu/kitakukonnansha_taisaku.html" }
+    ]
+  },
+  {
+    id: "center-gai",
+    name: "センター街の治安と「バスケットボールストリート」への改名",
+    era: "modern",
+    dark: "社会問題",
+    year: 2011,
+    yearLabel: "1990年代〜／2011年9月 改名",
+    lat: 35.6598, lng: 139.6993,
+    area: "センター街",
+    summary: "「怖い・危ない街」のイメージを変えようと、通りの名前まで変えた。",
+    detail: "センター街は一時期、不良の若者が集まる場所として知られ、治安の悪いイメージがつきました。警察の取り締まりやパトロール、美化活動で安全性は向上しましたが「怖い街」のイメージが残ったため、2011年9月、メイン通りの名前を「バスケットボールストリート」に変えました。国立代々木競技場第二体育館（バスケットボールの聖地）へ続く道であることなどが理由です。",
+    tags: ["社会問題", "治安", "若者", "地名"],
+    wiki: ["渋谷センター街"],
+    sources: [
+      { title: "J-CAST 「渋谷センター街」が「バスケ通り」に", url: "https://www.j-cast.com/2011/09/12106920.html" },
+      { title: "Jタウンネット センター街？バスケ通り？ 改名から5年", url: "https://j-town.net/2016/05/07225395.html" }
+    ]
+  },
+  {
+    id: "hatagaya-2020",
+    name: "幡ヶ谷のバス停で起きた路上生活者の殺害事件",
+    era: "modern",
+    dark: "事件",
+    year: 2020,
+    yearLabel: "2020年（令和2年）11月",
+    lat: 35.6768, lng: 139.6745,
+    area: "幡ヶ谷（位置は地域の目安）",
+    summary: "バス停で夜を過ごしていた女性が殴られて亡くなり、女性の貧困と排除が問われた。",
+    detail: "2020年11月、幡ヶ谷のバス停のベンチで寝泊まりしていた路上生活の女性が、近くに住む男に殴られて亡くなりました。男は「あの場所からいなくなってほしかった」という趣旨の供述をしたと報じられています。コロナ禍で仕事と住まいを失った女性の貧困や、路上生活者への排除・暴力の問題が大きく注目され、追悼と抗議のデモも行われました。",
+    tags: ["事件", "貧困", "路上生活", "コロナ禍"],
+    sources: [
+      { title: "東京新聞 幡ヶ谷のバス停で寝泊まりする女性を襲った悲劇", url: "https://www.tokyo-np.co.jp/article/72648" },
+      { title: "婦人公論 コロナ禍の渋谷バス停・ホームレス女性殺害事件で見えた日本の現状", url: "https://fujinkoron.jp/articles/-/6909" }
+    ]
   }
 ];
 
@@ -1864,6 +1985,14 @@ window.SPOTS = [
  *   dark   : 事件・事故・災害などの出来事なら true
  */
 window.TIMELINE = [
+  { year: 1944.1, label: "1944年2月", text: "渋谷駅前で建物疎開。住民が一斉に立ち退く", spot: "tatemono-sokai", dark: true },
+  { year: 1944.6, label: "1944年8月", text: "区内の小学生が静岡県・富山県・青森県などへ集団疎開", dark: true },
+  { year: 1944.9, label: "1944年11月27日", text: "渋谷区への空襲が始まる（翌年5月までに12回）", spot: "senzai-shibuya", dark: true },
+  { year: 1961,  label: "1961年", text: "ドブ川化した渋谷川の駅周辺部分にふたがされる", spot: "shibuyagawa-pollution", dark: true },
+  { year: 2001,  label: "2001年", text: "山手線の内側で唯一の清掃工場・渋谷清掃工場が完成", spot: "seisou-kojo" },
+  { year: 2011.2, label: "2011年3月11日", text: "東日本大震災。渋谷にも帰宅困難者があふれる", spot: "earthquake-2011", dark: true },
+  { year: 2011.7, label: "2011年9月", text: "センター街のメイン通りが「バスケットボールストリート」に改名", spot: "center-gai" },
+  { year: 2020.9, label: "2020年11月", text: "幡ヶ谷のバス停で路上生活の女性が殺害される", spot: "hatagaya-2020", dark: true },
   { year: 1185,  label: "1185〜90年頃", text: "長泉寺が創建されたと伝わる", spot: "chosenji" },
   { year: 1561,  label: "1561年", text: "幡ヶ谷に荘厳寺が創建されたと伝わる", spot: "shogonji" },
   { year: 1747,  label: "1747年", text: "荘厳寺に不動明王像が移され「幡ヶ谷不動尊」に", spot: "shogonji" },

@@ -165,7 +165,11 @@
   });
   map.on("popupclose", function () { popupSpot = null; });
 
-  var markerLayer = L.featureGroup().addTo(map);
+  // 近くのマーカーは数字付きの丸にまとめる（プラグインが読み込めなければ通常表示）
+  var clustered = typeof L.markerClusterGroup === "function";
+  var markerLayer = (clustered
+    ? L.markerClusterGroup({ maxClusterRadius: 40, disableClusteringAtZoom: 17, spiderfyOnMaxZoom: true, showCoverageOnHover: false })
+    : L.featureGroup()).addTo(map);
   var markers = {};
   SPOTS.forEach(function (spot) {
     var icon = L.divIcon({
@@ -273,11 +277,15 @@
   var count = document.getElementById("count");
 
   function focusSpot(spot) {
+    var marker = markers[spot.id];
     // 絞り込みで非表示のスポットでも、年表などから選ばれたら表示する
-    if (!markerLayer.hasLayer(markers[spot.id])) markerLayer.addLayer(markers[spot.id]);
+    if (!markerLayer.hasLayer(marker)) markerLayer.addLayer(marker);
     // 地図の移動が終わってから開かないと、ポップアップが画面外にはみ出すことがある
-    map.once("moveend", function () { markers[spot.id].openPopup(); });
-    map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 16));
+    map.once("moveend", function () {
+      if (clustered) markerLayer.zoomToShowLayer(marker, function () { marker.openPopup(); });
+      else marker.openPopup();
+    });
+    map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 17));
     if (window.matchMedia("(max-width: 720px)").matches) {
       document.getElementById("map").scrollIntoView({ behavior: "smooth" });
     }
@@ -288,8 +296,10 @@
     markerLayer.clearLayers();
     list.innerHTML = "";
     var visible = SPOTS.filter(matches);
+    var visibleMarkers = visible.map(function (spot) { return markers[spot.id]; });
+    if (clustered) markerLayer.addLayers(visibleMarkers);
+    else visibleMarkers.forEach(function (m) { markerLayer.addLayer(m); });
     visible.forEach(function (spot) {
-      markerLayer.addLayer(markers[spot.id]);
       var li = document.createElement("li");
       li.tabIndex = 0;
       li.innerHTML =
