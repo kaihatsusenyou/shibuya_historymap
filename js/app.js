@@ -2,8 +2,31 @@
   "use strict";
 
   var ERAS = window.ERAS;
-  var SPOTS = window.SPOTS.slice().sort(function (a, b) { return a.year - b.year; });
-  var DISTRICTS = window.DISTRICTS || [];
+  var WARDS = window.WARDS || {};
+
+  // 表示する区は URL の ?ward=<キー> で決める（例: index.html?ward=chiyoda）
+  var wardKeys = Object.keys(WARDS);
+  var params = new URLSearchParams(location.search);
+  var wardKey = WARDS[params.get("ward")] ? params.get("ward") : wardKeys[0];
+  var WARD = WARDS[wardKey];
+
+  var SPOTS = WARD.spots.slice().sort(function (a, b) { return a.year - b.year; });
+  var DISTRICTS = WARD.districts || [];
+
+  // ---- 区の切り替え ----
+  var wardSelect = document.getElementById("ward");
+  wardKeys.forEach(function (key) {
+    var opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = WARDS[key].label;
+    if (key === wardKey) opt.selected = true;
+    wardSelect.appendChild(opt);
+  });
+  wardSelect.addEventListener("change", function () {
+    params.set("ward", wardSelect.value);
+    location.search = params.toString();
+  });
+  document.title = WARD.label + "｜東京歴史マップ";
 
   // 各スポットの地域を area の文字列から決める
   SPOTS.forEach(function (spot) {
@@ -14,7 +37,7 @@
   });
 
   // ---- 地図 ----
-  var map = L.map("map", { zoomControl: true }).setView([35.664, 139.698], 14);
+  var map = L.map("map", { zoomControl: true }).setView(WARD.center, WARD.zoom || 14);
 
   var gsiAttr = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>';
 
@@ -229,6 +252,7 @@
   });
 
   var districtSelect = document.getElementById("district");
+  document.getElementById("district-all").textContent = WARD.label + "全域";
   DISTRICTS.forEach(function (d) {
     var opt = document.createElement("option");
     var n = SPOTS.filter(function (s) { return s.district === d.key; }).length;
@@ -243,7 +267,7 @@
     // 選んだ地域が見えるように地図を合わせる
     var visible = SPOTS.filter(matches);
     if (visible.length) {
-      map.fitBounds(L.latLngBounds(visible.map(function (s) { return [s.lat, s.lng]; })), { padding: [40, 40], maxZoom: 16 });
+      map.fitBounds(L.latLngBounds(visible.map(function (s) { return [s.lat, s.lng]; })), { padding: [40, 40], maxZoom: 16, animate: false });
     }
   });
 
@@ -280,12 +304,16 @@
     var marker = markers[spot.id];
     // 絞り込みで非表示のスポットでも、年表などから選ばれたら表示する
     if (!markerLayer.hasLayer(marker)) markerLayer.addLayer(marker);
-    // 地図の移動が終わってから開かないと、ポップアップが画面外にはみ出すことがある
-    map.once("moveend", function () {
+    // 別の移動（地域の切り替えなど）のアニメーション中でも確実に開けるよう、
+    // アニメーションなしで移動してからポップアップを開く
+    function open() {
+      map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 17), { animate: false });
       if (clustered) markerLayer.zoomToShowLayer(marker, function () { marker.openPopup(); });
       else marker.openPopup();
-    });
-    map.setView([spot.lat, spot.lng], Math.max(map.getZoom(), 17));
+    }
+    // 拡大・縮小のアニメーション中なら、終わってから開く
+    if (map._animatingZoom) map.once("zoomend", open);
+    else open();
     if (window.matchMedia("(max-width: 720px)").matches) {
       document.getElementById("map").scrollIntoView({ behavior: "smooth" });
     }
@@ -319,7 +347,7 @@
   var spotById = {};
   SPOTS.forEach(function (s) { spotById[s.id] = s; });
   var timeline = document.getElementById("timeline");
-  (window.TIMELINE || []).slice().sort(function (a, b) { return a.year - b.year; }).forEach(function (ev) {
+  (WARD.timeline || []).slice().sort(function (a, b) { return a.year - b.year; }).forEach(function (ev) {
     var li = document.createElement("li");
     var spot = ev.spot && spotById[ev.spot];
     if (spot) li.style.setProperty("--dot", ERAS[spot.era].color);

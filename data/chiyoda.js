@@ -1,0 +1,828 @@
+/*
+ * 千代田区の歴史スポットデータ（区ごとのデータファイル）
+ *
+ * 項目の意味は data/shibuya.js の先頭の説明と同じです。
+ * ※ 年代・由来には諸説あるものを含みます。「伝」「社伝」は伝承によるものです。
+ *    事件・事故については、被害者や加害者など個人を特定する情報は載せない方針です
+ *    （公人として公の場で起きた事件の当事者を除く）。
+ */
+(function () {
+
+var DISTRICTS = [
+  { key: "kokyo", label: "皇居・北の丸・千鳥ヶ淵", keywords: ["皇居", "北の丸", "千鳥ヶ淵", "桜田門"] },
+  { key: "marunouchi", label: "丸の内・大手町・有楽町", keywords: ["丸の内", "大手町", "有楽町", "東京駅"] },
+  { key: "nagatacho", label: "永田町・霞が関・日比谷", keywords: ["永田町", "霞が関", "日比谷", "内幸町", "三宅坂"] },
+  { key: "kudan", label: "九段・麹町・番町", keywords: ["九段", "麹町", "番町"] },
+  { key: "akihabara", label: "秋葉原・外神田・万世橋", keywords: ["秋葉原", "外神田", "万世橋"] },
+  { key: "kanda", label: "神田・神保町・御茶ノ水", keywords: ["神田", "神保町", "御茶ノ水", "駿河台", "湯島"] }
+];
+
+var SPOTS = [
+  // ---------------- 原始・古代 ----------------
+  {
+    id: "kanda-myojin",
+    name: "神田明神（神田神社）",
+    era: "ancient",
+    year: 730,
+    yearLabel: "社伝 730年（天平2年）創建／1616年 現在地へ",
+    lat: 35.7020, lng: 139.7678,
+    area: "御茶ノ水・湯島台",
+    summary: "江戸総鎮守。神田祭は「天下祭」と呼ばれた。",
+    detail: "社伝では730年、現在の大手町・将門塚のあたりに創建されました。江戸幕府が開かれると幕府の尊崇を受け、1616年に江戸城の表鬼門を守る現在の地へ移されました。江戸時代を通じて「江戸総鎮守」として将軍から庶民まで信仰を集め、神田祭は山王祭と並んで将軍も見物する「天下祭」と呼ばれました。",
+    highlights: ["神田祭（2年に1度の本祭）"],
+    tags: ["神社", "祭", "江戸総鎮守"],
+    wiki: ["神田明神"],
+    sources: [
+      { title: "神田明神 神田明神とは", url: "https://www.kandamyoujin.or.jp/profile/" }
+    ]
+  },
+  {
+    id: "masakado",
+    name: "将門塚（平将門の首塚）",
+    era: "ancient",
+    year: 940,
+    yearLabel: "伝承（940年 平将門の死後）",
+    lat: 35.6868, lng: 139.7640,
+    area: "大手町",
+    summary: "オフィス街の真ん中に残る、祟りの伝説で知られる塚。",
+    detail: "京で晒された平将門の首が故郷を目指して飛び、この地に落ちたという伝説があります。周辺で災いが続いたため、1307年に供養が行われたと伝わります。関東大震災後に大蔵省の仮庁舎を建てた際や、戦後にGHQが撤去しようとした際にも不幸や事故が続いたと語られ、今も大手町のビル街の中に大切に残されています。",
+    tags: ["伝説", "平将門", "大手町"],
+    wiki: ["将門塚"],
+    sources: [
+      { title: "国税庁 大手町の首塚", url: "https://www.nta.go.jp/about/organization/ntc/sozei/quiz/1110/index.htm" }
+    ]
+  },
+
+  // ---------------- 中世 ----------------
+  {
+    id: "edo-castle",
+    name: "江戸城（太田道灌の築城）",
+    era: "medieval",
+    year: 1457,
+    yearLabel: "1457年（長禄元年）築城",
+    lat: 35.6852, lng: 139.7528,
+    area: "皇居",
+    summary: "太田道灌が築き、徳川家康が入って巨大な城と城下町をつくった。",
+    detail: "1457年に太田道灌が築いた城が始まりです。1590年に徳川家康が入城し、家康・秀忠・家光の三代50年にわたる大工事を経て、1640年に日本最大級の城郭が完成しました。明治維新後は皇居となっています。",
+    tags: ["城", "太田道灌", "徳川家康"],
+    wiki: ["江戸城"],
+    sources: [
+      { title: "千代田区 まちの記憶保存プレートガイド 江戸城築城", url: "https://www.city.chiyoda.lg.jp/koho/kurashi/volunteer/kioku/edojo.html" },
+      { title: "国際子ども図書館 江戸城（皇居）", url: "https://www.kodomo.go.jp/guide/ya/tokyo/nagatacho/spots_edocastle.html" }
+    ]
+  },
+  {
+    id: "hie-jinja",
+    name: "日枝神社（山王さん）",
+    era: "medieval",
+    year: 1478,
+    yearLabel: "1478年 太田道灌が勧請／1659年 現在地へ",
+    lat: 35.6746, lng: 139.7395,
+    area: "永田町",
+    summary: "江戸城の鎮守。山王祭は神田祭と並ぶ「天下祭」。",
+    detail: "1478年、太田道灌が江戸城を守る神として川越の山王社を勧請したのが始まりとされます。徳川家康の入城後は江戸城の鎮守として崇敬されました。明暦の大火で社殿を焼失し、1659年に江戸城の裏鬼門にあたる赤坂の高台（現在地）に移りました。",
+    highlights: ["山王祭", "稲荷参道の千本鳥居"],
+    tags: ["神社", "祭", "江戸城"],
+    wiki: ["日枝神社"],
+    sources: [
+      { title: "千代田区 文化財 日枝神社", url: "https://www.edo-chiyoda.jp/bunkazaihogonotorikumi/bunkazaihogochosain/hogocho2019/1/360.html" }
+    ]
+  },
+
+  // ---------------- 江戸 ----------------
+  {
+    id: "hibiya-irie",
+    name: "日比谷入江の埋め立て",
+    era: "edo",
+    year: 1603,
+    yearLabel: "1603年頃から本格化",
+    lat: 35.6740, lng: 139.7590,
+    area: "日比谷",
+    summary: "日比谷や丸の内は、かつて海だった。",
+    detail: "江戸城のすぐ南には「日比谷入江」と呼ばれる海が入り込んでいました。徳川家康は神田山（現在の駿河台）を切り崩した土で入江を埋め立て、1603年頃から工事が本格化しました。1620年代には大名屋敷が建ち並ぶ土地に変わり、現在の日比谷・丸の内の土台となりました。",
+    tags: ["埋め立て", "都市計画", "徳川家康"],
+    wiki: ["日比谷入江"],
+    sources: [
+      { title: "大丸有マップ 日比谷入江", url: "https://www.tokyo-omy-council.jp/map-on/map_point_01/01_01.html" },
+      { title: "レファレンス協同データベース 神田山の開削", url: "https://crd.ndl.go.jp/reference/entry/index.php?id=1000360545&page=ref_view" }
+    ]
+  },
+  {
+    id: "kandagawa",
+    name: "神田川の開削と御茶ノ水の渓谷",
+    era: "edo",
+    year: 1620,
+    yearLabel: "1620年（元和6年）工事開始",
+    lat: 35.6995, lng: 139.7650,
+    area: "御茶ノ水",
+    summary: "伊達政宗が掘った、都心の「人工の渓谷」。",
+    detail: "水害対策のため、二代将軍秀忠の時代に神田山を掘り割って川の流れを変える工事が始まり、仙台藩の伊達政宗が担当しました。今の御茶ノ水駅あたりの深い谷は、この工事でつくられたものです。",
+    tags: ["川", "土木", "伊達政宗"],
+    wiki: ["神田川"],
+    sources: [
+      { title: "明治大学 「神田山」の開削を命じた家康", url: "https://www.meiji.ac.jp/history/meidai_sanmyaku/thema/article/mkmht000000t9raf.html" }
+    ]
+  },
+  {
+    id: "tenshudai",
+    name: "江戸城天守台と明暦の大火",
+    era: "edo",
+    dark: "災害",
+    year: 1657,
+    yearLabel: "1657年（明暦3年）",
+    lat: 35.6887, lng: 139.7545,
+    area: "皇居（東御苑）",
+    summary: "江戸の大半を焼いた大火で天守が焼け、二度と建てられなかった。",
+    detail: "1657年の明暦の大火は、江戸城を含む江戸の町の大半を2日で焼き尽くしました。天守を載せる天守台は築き直されましたが、幕閣の保科正之が「天守は城の守りに必要ない」として町の復興を優先したため、五層の大天守は再建されませんでした。皇居東御苑に残る天守台は、その名残です。",
+    highlights: ["皇居東御苑の天守台"],
+    tags: ["災害", "大火", "江戸城"],
+    wiki: ["江戸城", "明暦の大火"],
+    sources: [
+      { title: "城びと 太田道灌・徳川幕府・そして皇居へ 江戸城の歴史", url: "https://shirobito.jp/article/557" }
+    ]
+  },
+  {
+    id: "matsunoroka",
+    name: "松之大廊下跡（赤穂事件の発端）",
+    era: "edo",
+    dark: "事件",
+    year: 1701,
+    yearLabel: "1701年（元禄14年）3月14日",
+    lat: 35.6872, lng: 139.7562,
+    area: "皇居（東御苑）",
+    summary: "浅野内匠頭が吉良上野介に斬りつけ、「忠臣蔵」へつながった場所。",
+    detail: "江戸城本丸御殿の松之大廊下で、赤穂藩主・浅野内匠頭が高家・吉良上野介に斬りかかりました。城内での刃傷は厳禁で、浅野は即日切腹、赤穂藩は取りつぶされました。翌年の赤穂浪士の討ち入りは「忠臣蔵」として語り継がれています。",
+    highlights: ["皇居東御苑の「松之大廊下跡」の碑"],
+    tags: ["事件", "赤穂事件", "忠臣蔵"],
+    wiki: ["赤穂事件"],
+    sources: [
+      { title: "Visit Chiyoda 松の大廊下跡", url: "https://visit-chiyoda.tokyo/app/spot/detail/31" }
+    ]
+  },
+  {
+    id: "minami-bugyosho",
+    name: "南町奉行所跡",
+    era: "edo",
+    year: 1707,
+    yearLabel: "江戸時代中期〜幕末",
+    lat: 35.6740, lng: 139.7630,
+    area: "有楽町",
+    summary: "名奉行・大岡越前が務めた役所の跡。",
+    detail: "江戸の町人の行政・裁判・消防などを担った町奉行所の一つで、名奉行として知られる大岡忠相（大岡越前）が活躍しました。JR有楽町駅の中央口前が跡地です。",
+    tags: ["奉行所", "大岡越前", "有楽町"],
+    sources: [
+      { title: "Visit Chiyoda 南町奉行所跡", url: "https://visit-chiyoda.tokyo/app/spot/detail/637" },
+      { title: "江戸東京博物館 北町奉行所、南町奉行所はどこにあったのか", url: "https://www.edo-tokyo-museum.or.jp/library/reference/5768.html" }
+    ]
+  },
+  {
+    id: "kita-bugyosho",
+    name: "北町奉行所跡",
+    era: "edo",
+    year: 1805,
+    yearLabel: "1805年から現在地付近",
+    lat: 35.6830, lng: 139.7690,
+    area: "丸の内（東京駅八重洲北口）",
+    summary: "「遠山の金さん」が務めた役所の跡。",
+    detail: "北町奉行所は何度か移転し、1805年以降は現在の東京駅日本橋口付近にありました。「遠山の金さん」こと遠山景元も奉行を務めています。発掘調査では奉行所の上水施設や井戸、江戸城外堀の石垣も見つかりました。",
+    tags: ["奉行所", "遠山の金さん", "東京駅"],
+    sources: [
+      { title: "Visit Chiyoda 北町奉行所跡", url: "https://visit-chiyoda.tokyo/app/spot/detail/639" }
+    ]
+  },
+  {
+    id: "sakuradamon",
+    name: "桜田門外の変",
+    era: "edo",
+    dark: "事件",
+    year: 1860,
+    yearLabel: "1860年（安政7年）3月3日",
+    lat: 35.6778, lng: 139.7527,
+    area: "桜田門",
+    summary: "雪の朝、大老・井伊直弼が暗殺され、幕府の権威が揺らいだ。",
+    detail: "勅許を得ずに条約を結び、安政の大獄で反対派を弾圧した大老・井伊直弼が、江戸城に登城する途中、桜田門の外で水戸藩の浪士17人と薩摩藩士1人に襲われて亡くなりました。大雪の朝のことでした。幕府の最高責任者が白昼に殺されたこの事件は、幕末の政局の大きな転換点となりました。",
+    highlights: ["桜田門（重要文化財）"],
+    tags: ["事件", "幕末", "井伊直弼"],
+    wiki: ["桜田門外の変"],
+    sources: [
+      { title: "城びと なぜ外桜田門で大老暗殺事件が起こった？", url: "https://shirobito.jp/article/1322" }
+    ]
+  },
+
+  // ---------------- 明治・大正 ----------------
+  {
+    id: "yasukuni",
+    name: "靖国神社",
+    era: "meiji",
+    year: 1869,
+    yearLabel: "1869年 東京招魂社／1879年 靖国神社に改称",
+    lat: 35.6940, lng: 139.7440,
+    area: "九段",
+    summary: "戊辰戦争の戦没者を祀る招魂社として始まった神社。",
+    detail: "1869年、戊辰戦争の戦没者を祀るために東京招魂社として創建され、1879年に靖国神社と改称されました。その後の戦争の軍人・軍属などを祭神として祀っています。戦後は、太平洋戦争の指導者の合祀や首相の参拝をめぐって、国内外でたびたび議論になってきました。",
+    tags: ["神社", "戦争", "九段"],
+    wiki: ["靖国神社"],
+    sources: [
+      { title: "靖國神社について", url: "https://www.yasukuni.or.jp/history/" },
+      { title: "nippon.com 「靖国神社」の基礎知識", url: "https://www.nippon.com/ja/features/h00071/" }
+    ]
+  },
+  {
+    id: "akihabara",
+    name: "秋葉原の地名と電気街",
+    era: "meiji",
+    year: 1870,
+    yearLabel: "1870年 鎮火社／戦後 電気街に",
+    lat: 35.6984, lng: 139.7731,
+    area: "秋葉原",
+    summary: "火除け地の神社から生まれた地名。戦後の闇市から電気の街へ。",
+    detail: "1869年の大火のあと、この地に火除け地がつくられ、翌年、火除けの神を祀る鎮火社が置かれました。人々が有名な秋葉大権現を祀ったと思い込んで「あきばっぱら」と呼んだことが「秋葉原」の由来とされます。1945年の空襲で焼け野原になったあと、ラジオ部品を扱う露店が集まり、電気街へと発展しました。",
+    tags: ["地名", "電気街", "闇市"],
+    wiki: ["秋葉原"],
+    sources: [
+      { title: "秋葉原電気街振興会 秋葉原の由来", url: "https://akiba.or.jp/archives/history00" },
+      { title: "ASCII.jp 秋葉原が\"電気とオタク文化の街\"になった理由", url: "https://ascii.jp/elem/000/004/251/4251498/" }
+    ]
+  },
+  {
+    id: "rokumeikan",
+    name: "鹿鳴館跡",
+    era: "meiji",
+    year: 1883,
+    yearLabel: "1883年（明治16年）開館／1940年 取り壊し",
+    lat: 35.6717, lng: 139.7580,
+    area: "内幸町",
+    summary: "欧化政策の象徴だった社交場。",
+    detail: "不平等条約の改正をめざす外務卿・井上馨が、外国の要人を招く社交場として建てさせた洋館で、コンドルが設計しました。舞踏会が開かれ「鹿鳴館時代」という言葉も生まれましたが、条約改正の失敗で井上が辞任すると役目を終え、1940年に取り壊されました。",
+    tags: ["建築", "欧化政策", "コンドル"],
+    wiki: ["鹿鳴館"],
+    sources: [
+      { title: "ジャパンナレッジ 鹿鳴館", url: "https://japanknowledge.com/introduction/keyword.html?i=1380" }
+    ]
+  },
+  {
+    id: "meiji-palace",
+    name: "明治宮殿と皇居の焼失",
+    era: "meiji",
+    dark: "戦争",
+    year: 1888,
+    yearLabel: "1888年 完成／1945年5月25日 焼失",
+    lat: 35.6810, lng: 139.7510,
+    area: "皇居",
+    summary: "旧江戸城西の丸に建てられた宮殿は、空襲で焼け落ちた。",
+    detail: "1888年に完成し、翌年から明治天皇が住みました。1945年5月25日の空襲で焼失し、昭和天皇は鉄筋コンクリートの御文庫に移りました。現在の宮殿は1968年に完成したものです。",
+    tags: ["皇居", "宮殿", "空襲"],
+    wiki: ["明治宮殿", "皇居"],
+    sources: [
+      { title: "東京都立図書館 江戸城から明治宮殿へ", url: "https://www.library.metro.tokyo.lg.jp/collection/features/digital_showcase/055/" }
+    ]
+  },
+  {
+    id: "nikolai",
+    name: "ニコライ堂（東京復活大聖堂）",
+    era: "meiji",
+    year: 1891,
+    yearLabel: "1891年 竣工／1929年 震災から再建",
+    lat: 35.6977, lng: 139.7655,
+    area: "駿河台",
+    summary: "緑のドームが目印の、日本ハリストス正教会の大聖堂。国の重要文化財。",
+    detail: "1891年、シチュールポフの原設計をもとにコンドルが実施設計して完成しました。1923年の関東大震災で鐘楼やドームが崩れ内部も焼けましたが、岡田信一郎の設計で1929年に修復されました。",
+    tags: ["教会", "建築", "重要文化財", "震災"],
+    wiki: ["ニコライ堂"],
+    sources: [
+      { title: "東京くらしねっと TOKYO景観探訪 ニコライ堂", url: "https://www.shouhiseikatu.metro.tokyo.lg.jp/kurashi/1706/keikan.html" }
+    ]
+  },
+  {
+    id: "ichigokan",
+    name: "三菱一号館と「一丁倫敦」",
+    era: "meiji",
+    year: 1894,
+    yearLabel: "1894年 竣工／1968年 解体／2009年 復元",
+    lat: 35.6780, lng: 139.7630,
+    area: "丸の内",
+    summary: "丸の内初のオフィスビル。レンガの街並みは「一丁倫敦」と呼ばれた。",
+    detail: "1890年、三菱が陸軍の練兵場跡などの払い下げを受けて丸の内の街づくりを始めました。1894年にコンドルの設計で三菱一号館が完成すると、馬場先通り沿いにレンガ造りのビルが並び「一丁倫敦（ロンドン）」と呼ばれました。一号館は1968年に解体されましたが、2009年に復元され、美術館になっています。",
+    tags: ["建築", "オフィス街", "コンドル"],
+    wiki: ["三菱一号館"],
+    sources: [
+      { title: "このまちアーカイブス 丸の内の『一丁倫敦』", url: "https://smtrc.jp/town-archives/city/marunouchi/p03.html" }
+    ]
+  },
+  {
+    id: "hibiya-park",
+    name: "日比谷公園",
+    era: "meiji",
+    year: 1903,
+    yearLabel: "1903年（明治36年）開園",
+    lat: 35.6735, lng: 139.7560,
+    area: "日比谷",
+    summary: "陸軍練兵場跡につくられた、日本初の洋風公園。",
+    detail: "近代国家の首都にふさわしい都市づくりの一環として、陸軍練兵場の跡地に一からつくられた日本初の洋風近代公園です。花壇や噴水、洋風のレストランなどが設けられました。",
+    tags: ["公園", "都市計画"],
+    wiki: ["日比谷公園"],
+    sources: [
+      { title: "東京都公園協会 日比谷公園 開園120周年", url: "https://www.tokyo-park.or.jp/special/hibiyapark120years/index.html" }
+    ]
+  },
+  {
+    id: "hibiya-yakiuchi",
+    name: "日比谷焼打事件",
+    era: "meiji",
+    dark: "事件",
+    year: 1905,
+    yearLabel: "1905年（明治38年）9月5日",
+    lat: 35.6745, lng: 139.7545,
+    area: "日比谷",
+    summary: "日露戦争の講和に怒った群衆が暴徒化した。",
+    detail: "日露戦争の講和条約（ポーツマス条約）で賠償金が得られなかったことに反発し、日比谷公園で開かれた講和反対の国民大会に数万人が集まりました。群衆は暴徒化して内務大臣官邸や新聞社、交番などを焼き打ちし、東京に戒厳令が出されました。",
+    tags: ["事件", "暴動", "日露戦争"],
+    wiki: ["日比谷焼打事件"],
+    sources: [
+      { title: "国際子ども図書館 日比谷公園", url: "https://www.kodomo.go.jp/guide/ya/tokyo/nagatacho/spots_hibiyapark.html" }
+    ]
+  },
+  {
+    id: "manseibashi",
+    name: "旧万世橋駅",
+    era: "meiji",
+    year: 1912,
+    yearLabel: "1912年 開業／1943年 休止／2013年 商業施設に",
+    lat: 35.6980, lng: 139.7710,
+    area: "万世橋",
+    summary: "東京駅と同じ辰野金吾の設計による、幻のターミナル駅。",
+    detail: "1912年に中央線の終着駅として開業した赤レンガの駅舎で、東京駅を手がけた辰野金吾が設計しました。1943年に休止され、その後は交通博物館として使われました。2013年に遺構を生かした商業施設「マーチエキュート神田万世橋」として生まれ変わり、当時の階段やホーム跡を見ることができます。",
+    tags: ["鉄道", "駅", "辰野金吾", "廃駅"],
+    wiki: ["万世橋駅"],
+    sources: [
+      { title: "nippon.com 赤レンガアーチの旧「万世橋駅」", url: "https://www.nippon.com/ja/column/g00139/" }
+    ]
+  },
+  {
+    id: "jimbocho",
+    name: "神保町古書店街",
+    era: "meiji",
+    year: 1913,
+    yearLabel: "1880年代〜／1913年の大火後に現在の形に",
+    lat: 35.6958, lng: 139.7580,
+    area: "神保町",
+    summary: "法律学校の学生のために生まれた、世界有数の古書店街。",
+    detail: "1880年代、明治法律学校（明治大学）や英吉利法律学校（中央大学）などが周辺に次々と開校し、学生向けの古書店が集まりました。1913年の神田の大火のあと、靖国通りの南側に店が移って現在の街並みができました。同じ年、岩波書店も古書店として開業し、翌年に夏目漱石『こころ』を出版しています。",
+    tags: ["古書店", "学生街", "出版"],
+    wiki: ["神田古書店街"],
+    sources: [
+      { title: "nippon.com 古書の街・神保町はどう生き残ってきたのか", url: "https://www.nippon.com/ja/japan-topics/b11002/" },
+      { title: "このまちアーカイブス 『本の街』神保町の発展", url: "https://smtrc.jp/town-archives/city/kanda/p07.html" }
+    ]
+  },
+  {
+    id: "tokyo-station",
+    name: "東京駅丸の内駅舎",
+    era: "meiji",
+    year: 1914,
+    yearLabel: "1914年 創建／1945年 空襲で焼失／2012年 復原",
+    lat: 35.6812, lng: 139.7660,
+    area: "丸の内（東京駅）",
+    summary: "辰野金吾設計のレンガ駅舎。空襲で失ったドームを2012年に取り戻した。",
+    detail: "1914年、「近代建築の父」辰野金吾の設計で完成しました。1945年の空襲で南北のドームや3階部分を焼失し、戦後は仮の姿で60年以上使われました。2003年に国の重要文化財に指定され、2012年に創建時の姿に復原されました。",
+    tags: ["駅", "建築", "辰野金吾", "重要文化財", "空襲"],
+    wiki: ["東京駅"],
+    sources: [
+      { title: "たてものフロンティア 東京駅丸の内駅舎の建築の歴史", url: "https://tatefro.com/entry-8.html" }
+    ]
+  },
+  {
+    id: "marubiru",
+    name: "丸ビル（丸ノ内ビルヂング）",
+    era: "meiji",
+    year: 1923,
+    yearLabel: "1923年 竣工／2002年 建て替え",
+    lat: 35.6812, lng: 139.7640,
+    area: "丸の内",
+    summary: "戦前最大のオフィスビル。「丸の内のシンボル」。",
+    detail: "1923年2月に完成した、戦前の国内で最大のオフィスビルです。完成した年の関東大震災で被害を受け、補強して1925年に改めて完成しました。2002年に建て替えられ、現在の丸ビルになっています。",
+    tags: ["建築", "オフィス街"],
+    wiki: ["丸の内ビルディング"],
+    sources: [
+      { title: "週刊BCN+ 1923年『丸ノ内ビルヂング竣工』", url: "https://www.weeklybcn.com/journal/column/detail/20230220_196673.html" }
+    ]
+  },
+  {
+    id: "imperial-hotel",
+    name: "帝国ホテル ライト館",
+    era: "meiji",
+    year: 1923,
+    yearLabel: "1923年 完成／1968年 解体",
+    lat: 35.6727, lng: 139.7590,
+    area: "内幸町",
+    summary: "落成披露の日に関東大震災。ほとんど無傷で耐えたライトの名建築。",
+    detail: "フランク・ロイド・ライトの設計で、1923年9月1日に落成披露を迎えるその日に関東大震災が起きました。建物は大きな損傷なく地震に耐え、世界に知られることになりました。1968年に解体され、中央玄関部分は愛知県の博物館明治村に移築されています。",
+    tags: ["建築", "ホテル", "ライト", "震災"],
+    wiki: ["帝国ホテル"],
+    sources: [
+      { title: "帝国ホテルの歴史", url: "https://www.imperialhotel.co.jp/recruit/about/history" },
+      { title: "博物館明治村 帝国ホテル中央玄関", url: "https://www.meijimura.com/sight/%E5%B8%9D%E5%9B%BD%E3%83%9B%E3%83%86%E3%83%AB%E4%B8%AD%E5%A4%AE%E7%8E%84%E9%96%A2/" }
+    ]
+  },
+  {
+    id: "kanto-quake",
+    name: "関東大震災と神田（焼け残った町）",
+    era: "meiji",
+    dark: "災害",
+    year: 1923,
+    yearLabel: "1923年（大正12年）9月1日",
+    lat: 35.6982, lng: 139.7760,
+    area: "神田佐久間町・和泉町",
+    summary: "旧神田区の94％が焼けた中、住民が自力で火を防いだ一角があった。",
+    detail: "関東大震災では現在の千代田区の大半が被災し、旧神田区は94％が焼失しました。その中で神田佐久間町・和泉町の一角では、住民が燃えやすい看板を取り外し、バケツリレーやポンプで消火を続けて延焼を食い止めました。住民による防災の手本として語り継がれています。",
+    tags: ["災害", "地震", "火災", "防災"],
+    wiki: ["関東大震災"],
+    sources: [
+      { title: "内閣府 火災から町を守った神田っ子──関東大震災", url: "https://www.bousai.go.jp/kohou/kouhoubousai/h27/81/past.html" },
+      { title: "千代田区 旧神田区・旧麹町区における関東大震災および戦災", url: "https://www.city.chiyoda.lg.jp/koho/kurashi/koseki/koseki/kyukandaku-kojimachiku-kokuchisho.html" }
+    ]
+  },
+
+  // ---------------- 昭和（戦前・戦中） ----------------
+  {
+    id: "kanda-seika",
+    name: "神田青果市場跡",
+    era: "prewar",
+    year: 1928,
+    yearLabel: "1928年 移転開場／1989年 大田市場へ",
+    lat: 35.7003, lng: 139.7725,
+    area: "秋葉原",
+    summary: "江戸以来の「東京の台所」。",
+    detail: "江戸時代から続いた神田の青物市場が1928年にこの地に移り、東京の青果を支えました。1989年に大田市場へ統合され、跡地は再開発されて秋葉原UDXなどになっています。",
+    tags: ["市場", "食", "再開発"],
+    wiki: ["神田青果市場"],
+    sources: [
+      { title: "ダイビル100年史 旧神田青果市場跡", url: "https://www.daibiru.co.jp/100th_history/topical/project08/01/" }
+    ]
+  },
+  {
+    id: "hibiya-kokaido",
+    name: "日比谷公会堂と浅沼委員長刺殺事件",
+    era: "prewar",
+    dark: "事件",
+    year: 1929,
+    yearLabel: "1929年 開館／1960年10月12日 事件",
+    lat: 35.6720, lng: 139.7550,
+    area: "日比谷",
+    summary: "演説中の野党第一党の党首が壇上で刺殺された。",
+    detail: "日比谷公会堂は1929年に完成した、佐藤功一設計の公会堂です。1960年10月12日、ここで開かれた3党首の立会演説会で、日本社会党の浅沼稲次郎委員長が演説中に17歳の少年に刺されて亡くなりました。テレビで中継されていたこの事件は、社会に大きな衝撃を与えました。",
+    tags: ["事件", "テロ", "政治"],
+    wiki: ["日比谷公会堂"],
+    sources: [
+      { title: "千代田区 景観まちづくり重要物件 日比谷公会堂・市政会館", url: "https://www.city.chiyoda.lg.jp/koho/machizukuri/kekan/documents/4-hibiyakoukaidou-siseikaikan.pdf" },
+      { title: "東京新聞 浅沼稲次郎刺殺（1960年）", url: "https://www.tokyo-np.co.jp/article/283682" }
+    ]
+  },
+  {
+    id: "chuo-post",
+    name: "東京中央郵便局とKITTE",
+    era: "prewar",
+    year: 1931,
+    yearLabel: "1931年 竣工／2013年 KITTE開業",
+    lat: 35.6795, lng: 139.7645,
+    area: "丸の内",
+    summary: "吉田鉄郎設計のモダニズム建築の名作。",
+    detail: "1931年に吉田鉄郎の設計で完成した、日本の柱と梁の構造を思わせるモダニズム建築の傑作です。再開発で一部が保存され、2013年に高層ビルの低層部として商業施設「KITTE」に生まれ変わりました。",
+    tags: ["建築", "モダニズム", "郵便"],
+    wiki: ["東京中央郵便局"],
+    sources: [
+      { title: "東京大学総合研究博物館 「東京中央郵便局」再考", url: "https://www.um.u-tokyo.ac.jp/web_museum/ouroboros/v18n1/v18n1_abe.html" }
+    ]
+  },
+  {
+    id: "goichigo",
+    name: "五・一五事件（旧首相官邸）",
+    era: "prewar",
+    dark: "事件",
+    year: 1932,
+    yearLabel: "1932年（昭和7年）5月15日",
+    lat: 35.6734, lng: 139.7432,
+    area: "永田町",
+    summary: "海軍の青年将校らが首相官邸を襲い、犬養毅首相を射殺した。",
+    detail: "1929年に完成したばかりの首相官邸を海軍の青年将校らが襲撃し、犬養毅首相を射殺しました。政党内閣の時代はこの事件で終わりを告げました。旧官邸の建物は曳家で移され、現在は首相公邸として使われています。",
+    tags: ["事件", "テロ", "軍部"],
+    wiki: ["五・一五事件"],
+    sources: [
+      { title: "国立公文書館 日本のあゆみ 五・一五事件", url: "https://www.archives.go.jp/ayumi/kobetsu/s07_1932_02.html" },
+      { title: "首相官邸 首相公邸（旧官邸）", url: "https://www.kantei.go.jp/jp/guide/guide04.html" }
+    ]
+  },
+  {
+    id: "kudan-kaikan",
+    name: "九段会館（旧軍人会館）と天井崩落",
+    era: "prewar",
+    dark: "災害",
+    year: 1934,
+    yearLabel: "1934年 完成／2011年3月11日 天井崩落",
+    lat: 35.6950, lng: 139.7520,
+    area: "九段",
+    summary: "東日本大震災の揺れで大ホールの天井が落ち、2人が亡くなった。",
+    detail: "1934年に軍人会館として建てられた建物で、戦後は九段会館として使われました。2011年3月11日、卒業式の最中に東日本大震災の揺れで大ホールのつり天井が崩れ落ち、2人が亡くなり多くの人がけがをしました。完成以来、天井は改修されていませんでした。建物は閉館し、一部を残して建て替えられています。",
+    tags: ["災害", "地震", "建築"],
+    wiki: ["九段会館"],
+    sources: [
+      { title: "日本経済新聞 九段会館の天井崩落で実況見分", url: "https://www.nikkei.com/article/DGXNASDG05006_V00C11A6CC1000/" }
+    ]
+  },
+  {
+    id: "niniroku",
+    name: "二・二六事件（永田町・三宅坂の占拠）",
+    era: "prewar",
+    dark: "事件",
+    year: 1936,
+    yearLabel: "1936年（昭和11年）2月26日〜29日",
+    lat: 35.6790, lng: 139.7460,
+    area: "永田町・三宅坂",
+    summary: "約1,400人の反乱部隊が政治と軍の中心部を4日間占拠した。",
+    detail: "陸軍の青年将校らが約1,400人の兵を率いて首相官邸や重臣を襲い、斎藤実内大臣、高橋是清蔵相らを殺害しました。陸軍省・参謀本部・警視庁などが集まる永田町・三宅坂一帯を占拠しましたが、戒厳令のもと29日に鎮圧されました。首謀者らが処刑されたのは渋谷の陸軍刑務所でした。",
+    tags: ["事件", "クーデター", "軍部"],
+    wiki: ["二・二六事件"],
+    sources: [
+      { title: "国立公文書館 日本のあゆみ 二・二六事件", url: "https://www.archives.go.jp/ayumi/kobetsu/s11_1936_01.html" },
+      { title: "国立国会図書館 史料にみる日本の近代 2.26事件", url: "https://www.ndl.go.jp/modern/cha4/description07.html" }
+    ]
+  },
+  {
+    id: "diet",
+    name: "国会議事堂",
+    era: "prewar",
+    year: 1936,
+    yearLabel: "1936年（昭和11年）11月完成",
+    lat: 35.6759, lng: 139.7449,
+    area: "永田町",
+    summary: "17年がかりで建てられた、日本の議会政治の象徴。",
+    detail: "1920年に着工し、17年をかけて1936年に帝国議会議事堂として完成しました。全国から集められた石材が使われ、中央塔の高さは約65mあります。",
+    tags: ["建築", "政治", "議会"],
+    wiki: ["国会議事堂"],
+    sources: [
+      { title: "日本経済新聞 1936年11月7日 国会議事堂が完成", url: "https://www.nikkei.com/article/DGKDZO48056930V01C12A1KB2000/" },
+      { title: "参議院 国会議事堂案内", url: "https://www.sangiin.go.jp/japanese/taiken/gijidou/1.html" }
+    ]
+  },
+  {
+    id: "kanda-kushu",
+    name: "神田の空襲",
+    era: "prewar",
+    dark: "戦争",
+    year: 1945,
+    yearLabel: "1945年（昭和20年）2月25日ほか",
+    lat: 35.6930, lng: 139.7700,
+    area: "神田",
+    summary: "2月25日の空襲で神田区の大部分が焼けた。",
+    detail: "1945年2月25日の空襲で神田区の大部分が焼失し、焼けた家屋は1万2,700戸にのぼりました。神田地区の死者は383人、負傷者は3,000人を超えたとされます。度重なる空襲で、神田区の7割以上が被害を受けました。",
+    tags: ["戦争", "空襲", "神田"],
+    sources: [
+      { title: "千代田区 B29の脅威（記録集）", url: "https://www.city.chiyoda.lg.jp/documents/2104/kirokushu2.pdf" }
+    ]
+  },
+  {
+    id: "kyujo-jiken",
+    name: "宮城事件（終戦を阻もうとしたクーデター未遂）",
+    era: "prewar",
+    dark: "事件",
+    year: 1945.6,
+    yearLabel: "1945年（昭和20年）8月14日夜〜15日未明",
+    lat: 35.6840, lng: 139.7525,
+    area: "皇居",
+    summary: "玉音放送の録音盤を奪おうと、将校らが皇居に押し入った。",
+    detail: "ポツダム宣言の受諾に反対する陸軍の将校らが、近衛師団長を殺害してにせの命令で兵を動かし、皇居を封鎖しました。終戦を告げる昭和天皇の声を録音した「玉音盤」を探しましたが、侍従らが隠していたため見つからず、反乱は鎮圧されました。その日の正午、玉音放送が流れました。",
+    tags: ["事件", "終戦", "クーデター"],
+    wiki: ["宮城事件"],
+    sources: [
+      { title: "神戸新聞 「玉音放送」瀬戸際の攻防", url: "https://www.kobe-np.co.jp/rentoku/feature/202108/0014601562.shtml" }
+    ]
+  },
+
+  // ---------------- 昭和（戦後） ----------------
+  {
+    id: "mayday",
+    name: "血のメーデー事件（皇居前広場）",
+    era: "postwar",
+    dark: "事件",
+    year: 1952,
+    yearLabel: "1952年（昭和27年）5月1日",
+    lat: 35.6805, lng: 139.7575,
+    area: "皇居（皇居前広場）",
+    summary: "デモ隊と警官隊が衝突し、死者2人、負傷者約1,500人を出した。",
+    detail: "占領が終わった直後のメーデーで、使用を禁じられていた皇居前広場にデモ隊が入り、警官隊と激しく衝突しました。死者2人、負傷者約1,500人、逮捕者1,232人を出す大事件となりました。",
+    tags: ["事件", "デモ", "戦後"],
+    wiki: ["血のメーデー事件"],
+    sources: [
+      { title: "昭和館デジタルアーカイブ メーデーにおける暴動", url: "https://search.showakan.go.jp/search/video/detail.php?id=90110834" },
+      { title: "コトバンク メーデー事件", url: "https://kotobank.jp/word/%E3%83%A1%E3%83%BC%E3%83%87%E3%83%BC%E4%BA%8B%E4%BB%B6-141526" }
+    ]
+  },
+  {
+    id: "chidorigafuchi",
+    name: "千鳥ケ淵戦没者墓苑",
+    era: "postwar",
+    dark: "戦争",
+    year: 1959,
+    yearLabel: "1959年（昭和34年）創建",
+    lat: 35.6905, lng: 139.7430,
+    area: "千鳥ヶ淵",
+    summary: "遺族に引き渡せなかった戦没者の遺骨を納める、国の墓苑。",
+    detail: "日中戦争と太平洋戦争で海外などで亡くなり、身元がわからないなどの理由で遺族に引き渡せなかった戦没者の遺骨を安置する国の施設です。",
+    tags: ["戦争", "慰霊", "墓苑"],
+    wiki: ["千鳥ケ淵戦没者墓苑"],
+    sources: [
+      { title: "千鳥ヶ淵戦没者墓苑", url: "https://boen.or.jp/" }
+    ]
+  },
+  {
+    id: "anpo-diet",
+    name: "安保闘争と国会南通用門",
+    era: "postwar",
+    dark: "社会運動",
+    year: 1960,
+    yearLabel: "1960年（昭和35年）6月15日",
+    lat: 35.6750, lng: 139.7455,
+    area: "永田町",
+    summary: "国会に突入しようとしたデモ隊と警官隊の衝突で、女子大学生が亡くなった。",
+    detail: "日米安保条約の改定に反対する大規模なデモが国会を取り囲む中、6月15日、国会の南通用門から構内に入ろうとした学生と警官隊が衝突し、東京大学の女子学生が亡くなりました。条約は19日に自然成立し、岸内閣は混乱の責任をとって総辞職しました。",
+    tags: ["安保闘争", "デモ", "政治"],
+    wiki: ["安保闘争"],
+    sources: [
+      { title: "日本記者クラブ 6.15 運命の日", url: "https://www.jnpc.or.jp/journal/interviews/11921" }
+    ]
+  },
+  {
+    id: "budokan",
+    name: "日本武道館",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年（昭和39年）10月3日開館",
+    lat: 35.6933, lng: 139.7497,
+    area: "北の丸",
+    summary: "東京オリンピックの柔道会場。ビートルズの来日公演の舞台にも。",
+    detail: "1964年の東京オリンピックで柔道競技の会場として建てられました。法隆寺夢殿をモデルにした八角形で、屋根の稜線は富士山をイメージしています。1966年にはビートルズの来日公演が行われ、音楽の聖地にもなりました。",
+    tags: ["オリンピック", "武道", "音楽"],
+    wiki: ["日本武道館"],
+    sources: [
+      { title: "日本武道館について", url: "https://www.nipponbudokan.or.jp/about" },
+      { title: "JOC 日本武道館", url: "https://www.joc.or.jp/past_games/tokyo1964/memorialplace/13.html" }
+    ]
+  },
+  {
+    id: "kasumigaseki-bldg",
+    name: "霞が関ビルディング",
+    era: "postwar",
+    year: 1968,
+    yearLabel: "1968年（昭和43年）4月12日竣工",
+    lat: 35.6707, lng: 139.7486,
+    area: "霞が関",
+    summary: "日本初の本格的な超高層ビル。",
+    detail: "高さ147m・36階建てで、地震の多い日本で初めて建てられた本格的な超高層ビルです。耐震研究の成果を生かしてつくられ、その後の超高層ビル時代を切り開きました。",
+    tags: ["建築", "超高層ビル"],
+    wiki: ["霞が関ビルディング"],
+    sources: [
+      { title: "三井広報委員会 霞が関ビルディング", url: "https://www.mitsuipr.com/sights/historic-places/02/" }
+    ]
+  },
+  {
+    id: "mitsubishi-bomb",
+    name: "三菱重工爆破事件",
+    era: "postwar",
+    dark: "事件",
+    year: 1974,
+    yearLabel: "1974年（昭和49年）8月30日",
+    lat: 35.6800, lng: 139.7622,
+    area: "丸の内",
+    summary: "昼休みのオフィス街で時限爆弾が爆発し、8人が亡くなった。",
+    detail: "過激派グループ「東アジア反日武装戦線」が丸の内の三菱重工業本社ビルに仕掛けた時限爆弾が爆発し、8人が死亡、約380人が重軽傷を負いました。同グループはその後も企業を狙った連続爆破事件を起こしました。",
+    tags: ["事件", "テロ", "爆破"],
+    sources: [
+      { title: "時事ドットコム 連続企業爆破事件 写真特集", url: "https://www.jiji.com/jc/d4?p=mtt524&d=d4_mili2" },
+      { title: "文春オンライン 8月30日は三菱重工爆破事件が起こった日", url: "https://bunshun.jp/articles/-/3888" }
+    ]
+  },
+  {
+    id: "new-japan-fire",
+    name: "ホテルニュージャパン火災",
+    era: "postwar",
+    dark: "事故",
+    year: 1982,
+    yearLabel: "1982年（昭和57年）2月8日",
+    lat: 35.6762, lng: 139.7410,
+    area: "永田町",
+    summary: "33人が亡くなったホテル火災。利益優先のずさんな防火管理が被害を広げた。",
+    detail: "未明に9階の客室から出火し、33人が亡くなりました（うち13人は煙を逃れようと窓から転落）。宿泊客の寝たばこが原因とされますが、スプリンクラーの未設置など消防の指導を無視した経営や、ずさんな防火管理が被害を大きくしたとして、社長が有罪となりました。",
+    tags: ["事故", "火災", "防火"],
+    sources: [
+      { title: "弁護士JPニュース 33名犠牲「ホテルニュージャパン火災」から44年", url: "https://www.ben54.jp/news/3175" },
+      { title: "時事ドットコム ホテルニュージャパン火災 写真特集", url: "https://www.jiji.com/jc/d4?p=hnj206&d=d4_disaster" }
+    ]
+  },
+
+  // ---------------- 平成・令和 ----------------
+  {
+    id: "sarin",
+    name: "地下鉄サリン事件（霞ケ関駅）",
+    era: "modern",
+    dark: "事件",
+    year: 1995,
+    yearLabel: "1995年（平成7年）3月20日",
+    lat: 35.6737, lng: 139.7505,
+    area: "霞が関",
+    summary: "官庁街に向かう朝の地下鉄で、猛毒のサリンがまかれた。",
+    detail: "オウム真理教の信者らが、官庁街の霞ケ関駅に向かう丸ノ内線・日比谷線・千代田線の5本の電車内で神経ガスのサリンを散布しました。乗客や駅員ら十数人が亡くなり、約6,300人が負傷しました。霞ケ関駅でも、対応にあたった駅員が亡くなっています。",
+    tags: ["事件", "テロ", "地下鉄"],
+    sources: [
+      { title: "公安調査庁 地下鉄サリン事件について", url: "https://www.moj.go.jp/psia/aumarchive/sarinattack/" }
+    ]
+  },
+  {
+    id: "akiba-2008",
+    name: "秋葉原通り魔事件",
+    era: "modern",
+    dark: "事件",
+    year: 2008,
+    yearLabel: "2008年（平成20年）6月8日",
+    lat: 35.6995, lng: 139.7715,
+    area: "外神田",
+    summary: "歩行者天国にトラックが突っ込み、7人が亡くなった無差別殺傷事件。",
+    detail: "日曜日の昼過ぎ、歩行者天国でにぎわう秋葉原の交差点にトラックが突っ込み、降りてきた男が通行人や警察官を次々とナイフで刺しました。7人が亡くなり、10人が重軽傷を負いました。事件後、秋葉原の歩行者天国は2年半にわたって中止されました。",
+    tags: ["事件", "通り魔", "秋葉原"],
+    sources: [
+      { title: "ウィキニュース 東京・秋葉原で通り魔事件", url: "https://ja.wikinews.org/wiki/%E6%9D%B1%E4%BA%AC%E3%83%BB%E7%A7%8B%E8%91%89%E5%8E%9F%E3%81%A7%E9%80%9A%E3%82%8A%E9%AD%94%E4%BA%8B%E4%BB%B6_7%E4%BA%BA%E6%AD%BB%E3%81%AC%E3%80%81%E7%8A%AF%E4%BA%BA%E9%80%AE%E6%8D%95" }
+    ]
+  }
+];
+
+var TIMELINE = [
+  { year: 730,  label: "730年（社伝）", text: "神田明神が現在の大手町に創建される", spot: "kanda-myojin" },
+  { year: 940,  label: "940年頃（伝承）", text: "平将門の首が飛来したという将門塚の伝説", spot: "masakado" },
+  { year: 1457, label: "1457年", text: "太田道灌が江戸城を築く", spot: "edo-castle" },
+  { year: 1478, label: "1478年", text: "太田道灌が江戸城の鎮守として山王社（日枝神社）を勧請", spot: "hie-jinja" },
+  { year: 1590, label: "1590年", text: "徳川家康が江戸城に入る", spot: "edo-castle" },
+  { year: 1603, label: "1603年", text: "江戸幕府が開かれる。日比谷入江の埋め立てが本格化", spot: "hibiya-irie" },
+  { year: 1616, label: "1616年", text: "神田明神が江戸城の鬼門を守る現在地へ移る", spot: "kanda-myojin" },
+  { year: 1620, label: "1620年", text: "伊達政宗が神田山を掘り割り、御茶ノ水の谷ができる", spot: "kandagawa" },
+  { year: 1640, label: "1640年", text: "三代50年にわたる江戸城の大工事が完了", spot: "edo-castle" },
+  { year: 1657, label: "1657年", text: "明暦の大火。江戸城の天守が焼失し、再建されず", spot: "tenshudai", dark: true },
+  { year: 1659, label: "1659年", text: "日枝神社が現在の赤坂の高台に移る", spot: "hie-jinja" },
+  { year: 1701, label: "1701年3月14日", text: "松之大廊下で浅野内匠頭が吉良上野介に斬りつける", spot: "matsunoroka", dark: true },
+  { year: 1805, label: "1805年", text: "北町奉行所が現在の東京駅八重洲北口付近に移る", spot: "kita-bugyosho" },
+  { year: 1860, label: "1860年3月3日", text: "桜田門外の変。大老・井伊直弼が暗殺される", spot: "sakuradamon", dark: true },
+  { year: 1868, label: "1868年", text: "江戸城が明け渡され、のちに天皇の住まいとなる", spot: "edo-castle" },
+  { year: 1869, label: "1869年", text: "九段に東京招魂社（のちの靖国神社）が創建される", spot: "yasukuni" },
+  { year: 1870, label: "1870年", text: "大火の跡の火除け地に鎮火社。「秋葉原」の名の由来に", spot: "akihabara" },
+  { year: 1878, label: "1878年", text: "郡区町村編制法により麹町区・神田区が生まれる" },
+  { year: 1883, label: "1883年", text: "鹿鳴館が開館", spot: "rokumeikan" },
+  { year: 1888, label: "1888年", text: "明治宮殿が完成", spot: "meiji-palace" },
+  { year: 1890, label: "1890年", text: "三菱が丸の内の払い下げを受け、街づくりを始める", spot: "ichigokan" },
+  { year: 1891, label: "1891年", text: "ニコライ堂が完成", spot: "nikolai" },
+  { year: 1894, label: "1894年", text: "丸の内初のオフィスビル・三菱一号館が完成", spot: "ichigokan" },
+  { year: 1903, label: "1903年", text: "日本初の洋風公園・日比谷公園が開園", spot: "hibiya-park" },
+  { year: 1905, label: "1905年9月5日", text: "日比谷焼打事件。東京に戒厳令", spot: "hibiya-yakiuchi", dark: true },
+  { year: 1912, label: "1912年", text: "万世橋駅が開業", spot: "manseibashi" },
+  { year: 1913, label: "1913年", text: "神田の大火。岩波書店が古書店として開業", spot: "jimbocho" },
+  { year: 1914, label: "1914年", text: "東京駅丸の内駅舎が完成", spot: "tokyo-station" },
+  { year: 1923, label: "1923年2月", text: "丸ノ内ビルヂング（丸ビル）が完成", spot: "marubiru" },
+  { year: 1923.6, label: "1923年9月1日", text: "関東大震災。旧神田区の94％が焼失。帝国ホテル・ライト館は落成披露の日", spot: "kanto-quake", dark: true },
+  { year: 1928, label: "1928年", text: "神田青果市場が秋葉原に移る", spot: "kanda-seika" },
+  { year: 1929, label: "1929年", text: "日比谷公会堂が完成。新しい首相官邸も完成", spot: "hibiya-kokaido" },
+  { year: 1931, label: "1931年", text: "東京中央郵便局が完成", spot: "chuo-post" },
+  { year: 1932, label: "1932年5月15日", text: "五・一五事件。首相官邸で犬養毅首相が射殺される", spot: "goichigo", dark: true },
+  { year: 1934, label: "1934年", text: "軍人会館（のちの九段会館）が完成", spot: "kudan-kaikan" },
+  { year: 1936, label: "1936年2月26日", text: "二・二六事件。反乱部隊が永田町一帯を占拠", spot: "niniroku", dark: true },
+  { year: 1936.8, label: "1936年11月", text: "国会議事堂が完成", spot: "diet" },
+  { year: 1943, label: "1943年", text: "万世橋駅が休止される", spot: "manseibashi" },
+  { year: 1945.1, label: "1945年2月25日", text: "空襲で神田区の大部分が焼失", spot: "kanda-kushu", dark: true },
+  { year: 1945.4, label: "1945年5月25日", text: "空襲で明治宮殿が焼失。東京駅のドームも焼け落ちる", spot: "meiji-palace", dark: true },
+  { year: 1945.6, label: "1945年8月14〜15日", text: "宮城事件。終戦を阻もうとした将校らが皇居に押し入る", spot: "kyujo-jiken", dark: true },
+  { year: 1947, label: "1947年3月15日", text: "麹町区と神田区が合併し、千代田区が生まれる" },
+  { year: 1952, label: "1952年5月1日", text: "血のメーデー事件（皇居前広場）", spot: "mayday", dark: true },
+  { year: 1959, label: "1959年", text: "千鳥ケ淵戦没者墓苑が創建される", spot: "chidorigafuchi" },
+  { year: 1960.4, label: "1960年6月15日", text: "安保闘争。国会南通用門で女子学生が亡くなる", spot: "anpo-diet", dark: true },
+  { year: 1960.8, label: "1960年10月12日", text: "日比谷公会堂で浅沼稲次郎委員長が刺殺される", spot: "hibiya-kokaido", dark: true },
+  { year: 1964, label: "1964年", text: "日本武道館開館。東京オリンピックの柔道会場に", spot: "budokan" },
+  { year: 1966, label: "1966年", text: "日本武道館でビートルズが来日公演", spot: "budokan" },
+  { year: 1968, label: "1968年", text: "霞が関ビル竣工。新宮殿完成。帝国ホテル・ライト館と三菱一号館が解体", spot: "kasumigaseki-bldg" },
+  { year: 1974, label: "1974年8月30日", text: "丸の内で三菱重工爆破事件", spot: "mitsubishi-bomb", dark: true },
+  { year: 1982, label: "1982年2月8日", text: "ホテルニュージャパン火災、33人死亡", spot: "new-japan-fire", dark: true },
+  { year: 1989, label: "1989年", text: "神田青果市場が大田市場へ移る", spot: "kanda-seika" },
+  { year: 1995, label: "1995年3月20日", text: "地下鉄サリン事件", spot: "sarin", dark: true },
+  { year: 2002, label: "2002年", text: "丸ビルが建て替えられて開業", spot: "marubiru" },
+  { year: 2008, label: "2008年6月8日", text: "秋葉原通り魔事件", spot: "akiba-2008", dark: true },
+  { year: 2009, label: "2009年", text: "三菱一号館が復元される", spot: "ichigokan" },
+  { year: 2011, label: "2011年3月11日", text: "東日本大震災。九段会館の天井が崩落し2人死亡", spot: "kudan-kaikan", dark: true },
+  { year: 2012, label: "2012年", text: "東京駅丸の内駅舎が創建時の姿に復原", spot: "tokyo-station" },
+  { year: 2013, label: "2013年", text: "KITTE、マーチエキュート神田万世橋が開業", spot: "chuo-post" }
+];
+
+window.WARDS = window.WARDS || {};
+window.WARDS.chiyoda = {
+  label: "千代田区",
+  center: [35.686, 139.757],
+  zoom: 14,
+  districts: DISTRICTS,
+  spots: SPOTS,
+  timeline: TIMELINE
+};
+})();

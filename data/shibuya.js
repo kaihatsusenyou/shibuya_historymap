@@ -1,5 +1,5 @@
 /*
- * 渋谷区の歴史スポットデータ
+ * 渋谷区の歴史スポットデータ（区ごとのデータファイル）
  *
  * 追加・修正はこの配列を編集するだけで地図に反映されます。
  *   id        : 一意なID（英数字）
@@ -19,21 +19,13 @@
  *
  * ※ 年代・由来には諸説あるものを含みます。「伝」「社伝」は伝承によるものです。
  */
-window.ERAS = {
-  ancient:  { label: "原始・古代",        color: "#8d6e63" },
-  medieval: { label: "中世",              color: "#5d4037" },
-  edo:      { label: "江戸",              color: "#c62828" },
-  meiji:    { label: "明治・大正",        color: "#ef6c00" },
-  prewar:   { label: "昭和（戦前・戦中）", color: "#558b2f" },
-  postwar:  { label: "昭和（戦後）",       color: "#1565c0" },
-  modern:   { label: "平成・令和",        color: "#6a1b9a" }
-};
+(function () {
 
 /*
  * 地域区分（絞り込み用）。各スポットの area に keywords のどれかが含まれれば、その地域に入ります。
  * 上から順に判定します。
  */
-window.DISTRICTS = [
+var DISTRICTS = [
   { key: "harajuku", label: "原宿・表参道・神宮前", keywords: ["原宿", "表参道", "神宮前", "青山"] },
   { key: "sendagaya", label: "千駄ヶ谷", keywords: ["千駄ヶ谷"] },
   { key: "west", label: "上原・大山町・初台・幡ヶ谷・笹塚・本町", keywords: ["上原", "大山町", "初台", "幡ヶ谷", "笹塚", "本町", "西原"] },
@@ -44,7 +36,7 @@ window.DISTRICTS = [
   { key: "higashi", label: "東（國學院・氷川神社周辺）", keywords: ["東"] }
 ];
 
-window.SPOTS = [
+var SPOTS = [
   // ---------------- 原始・古代 ----------------
   {
     id: "yoyogi-hachiman-iseki",
@@ -2250,7 +2242,7 @@ window.SPOTS = [
  *   spot   : 関連スポットの id（任意。年表から地図へ移動できます）
  *   dark   : 事件・事故・災害などの出来事なら true
  */
-window.TIMELINE = [
+var TIMELINE = [
   { year: 725,   label: "725年（伝承）", text: "行基が千駄ヶ谷に聖輪寺を開いたと伝わる", spot: "shorinji" },
   { year: 1560,  label: "1560年代", text: "小田原北条氏の記録に「幡ヶ谷」の名が見える", spot: "hatagaya-hikawa" },
   { year: 1699,  label: "1699年頃", text: "将軍の鷹場だった野原が「広尾」と呼ばれるようになる", spot: "hiroo-name" },
@@ -2409,3 +2401,14 @@ window.TIMELINE = [
   { year: 2020,  label: "2020年",      text: "MIYASHITA PARK開業。原宿駅が新駅舎に。東急東横店閉店", spot: "miyashita-park" },
   { year: 2021,  label: "2021年",      text: "国立代々木競技場が国の重要文化財に", spot: "yoyogi-gym" }
 ];
+
+window.WARDS = window.WARDS || {};
+window.WARDS.shibuya = {
+  label: "渋谷区",
+  center: [35.664, 139.698],
+  zoom: 14,
+  districts: DISTRICTS,
+  spots: SPOTS,
+  timeline: TIMELINE
+};
+})();

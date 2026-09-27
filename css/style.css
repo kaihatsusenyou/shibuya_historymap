@@ -28,6 +28,16 @@ html, body {
   color: #fff;
 }
 .app-header h1 { margin: 0; font-size: 1.15rem; letter-spacing: .08em; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.ward-select {
+  padding: 4px 8px;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 6px;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: .95rem;
+}
+.ward-select option { color: var(--text); }
 
 .panel-toggle {
   display: none;
