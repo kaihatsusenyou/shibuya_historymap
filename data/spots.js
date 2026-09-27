@@ -1536,6 +1536,322 @@ window.SPOTS = [
     sources: [
       { title: "J-CAST 「天気の子」聖地・代々木会館の解体始まる", url: "https://www.j-cast.com/2019/08/02364177.html" }
     ]
+  },
+  // ---------------- 寺・文学者・文化・交通・社会（第5弾） ----------------
+  {
+    id: "chosenji",
+    name: "長泉寺",
+    era: "medieval",
+    year: 1185,
+    yearLabel: "文治年間（1185〜1190年）創建と伝わる",
+    lat: 35.6700, lng: 139.7076,
+    area: "神宮前",
+    summary: "原宿の明治通り沿いに建つ、鎌倉時代の創建と伝わる寺。",
+    detail: "文治年間の創建と伝わり、1593年に中興されました。本堂の裏、山手線の土手沿いには一面観音・千手観音・馬頭観音・地蔵菩薩など約200体の石仏が並んでいます。",
+    highlights: ["約200体の石仏群"],
+    tags: ["寺", "石仏", "原宿"],
+    wiki: ["長泉寺 (渋谷区)"],
+    sources: [
+      { title: "東京寺社めぐり 長泉寺", url: "https://tesshow.jp/shibuya/temple_jingumae_chosen.html" }
+    ]
+  },
+  {
+    id: "shogonji",
+    name: "荘厳寺（幡ヶ谷不動尊）",
+    era: "medieval",
+    year: 1561,
+    yearLabel: "1561年（永禄4年）創建と伝わる",
+    lat: 35.6788, lng: 139.6805,
+    area: "本町",
+    summary: "江戸近郊の三不動の一つに数えられた「幡ヶ谷のお不動さま」。",
+    detail: "1561年の創建と伝わる真言宗の寺で、本尊は薬師如来です。1747年に東村山の寺から不動明王像が移され、成田山・高幡山などと並ぶ江戸近郷の三不動の一つとして信仰を集めました。江戸時代には幡ヶ谷村の鎮守・氷川神社の別当寺でもありました。",
+    tags: ["寺", "不動尊", "幡ヶ谷"],
+    wiki: ["荘厳寺"],
+    sources: [
+      { title: "東京寺社めぐり 荘厳寺", url: "https://tesshow.jp/shibuya/temple_honcho_shogon.html" }
+    ]
+  },
+  {
+    id: "doppo",
+    name: "国木田独歩住居跡",
+    era: "meiji",
+    year: 1896,
+    yearLabel: "1896年（明治29年）",
+    lat: 35.6655, lng: 139.6970,
+    area: "宇田川町（位置はおおよそ）",
+    summary: "名作『武蔵野』の作家が暮らした、かつての渋谷村。",
+    detail: "作家の国木田独歩は1896年から当時の渋谷村（現在の宇田川町あたり）に住み、この地の雑木林の風景を描いた『武蔵野』を生みました。当時の渋谷は雑木林と畑の広がる郊外でした。",
+    tags: ["文学者", "武蔵野", "明治"],
+    wiki: ["国木田独歩"],
+    sources: [
+      { title: "渋谷区 文化人の碑", url: "https://www.city.shibuya.tokyo.jp/bunka/bunkazai/bunkazai/bunkajin.html" },
+      { title: "シブテナ 渋谷にいた文化人の碑 国木田独歩編", url: "https://shibutena.com/local_information/16414/" }
+    ]
+  },
+  {
+    id: "yumeji",
+    name: "竹久夢二住居跡",
+    era: "meiji",
+    year: 1921,
+    yearLabel: "1921年（大正10年）〜1924年",
+    lat: 35.6640, lng: 139.6964,
+    area: "宇田川町（位置はおおよそ）",
+    summary: "美人画で知られる画家・詩人が暮らした地。",
+    detail: "大正ロマンを代表する画家・詩人の竹久夢二は、1921年8月から1924年12月まで宇田川町に住み、「どんたく図案社」「一草居」の表札を出して創作に励みました。区の「文化人の碑」があります。",
+    tags: ["画家", "詩人", "大正ロマン"],
+    wiki: ["竹久夢二"],
+    sources: [
+      { title: "渋谷区 文化人の碑", url: "https://www.city.shibuya.tokyo.jp/bunka/bunkazai/bunkazai/bunkajin.html" }
+    ]
+  },
+  {
+    id: "inokashira-line",
+    name: "井の頭線渋谷駅（帝都電鉄）と玉電",
+    era: "prewar",
+    year: 1933,
+    yearLabel: "1933年（昭和8年）8月1日開業",
+    lat: 35.6583, lng: 139.6993,
+    area: "道玄坂",
+    summary: "渋谷に集まった私鉄の一つ。玉電は1969年に姿を消した。",
+    detail: "1933年、帝都電鉄が渋谷〜井の頭公園間を開業しました。現在の京王井の頭線です。一方、1907年から渋谷と玉川（二子玉川）を結んだ路面電車の「玉電」（東急玉川線）は、自動車の増加などにより1969年5月に廃止され、三軒茶屋〜下高井戸間だけが世田谷線として残りました。",
+    tags: ["鉄道", "井の頭線", "玉電", "路面電車"],
+    wiki: ["京王井の頭線"],
+    sources: [
+      { title: "京王電鉄 前史（1910〜1948）", url: "https://www.keio.co.jp/company/corporate/summary/history/history_01.html" },
+      { title: "このまちアーカイブス 「玉電」の廃止と新玉川線の開業", url: "https://smtrc.jp/town-archives/city/sangenjaya/p06.html" }
+    ]
+  },
+  {
+    id: "sendagaya-tunnel",
+    name: "仙寿院と千駄ヶ谷トンネル",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年（昭和39年）3月完成",
+    lat: 35.6763, lng: 139.7110,
+    area: "千駄ヶ谷",
+    summary: "墓地の下をくぐる、東京オリンピックのための道路トンネル。",
+    detail: "1964年の東京オリンピックに向けた道路整備で、紀州徳川家ゆかりの寺・仙寿院の墓地の下に道路を通すことになりました。お墓を一時的に移し、山を切り開いて道路とトンネルをつくってから埋め戻し、墓を元の場所に戻したといわれます。全長61mの短いトンネルです。",
+    tags: ["オリンピック", "道路", "寺", "トンネル"],
+    wiki: ["千駄ヶ谷トンネル"],
+    sources: [
+      { title: "テレビ東京 アド街ック天国 千駄ヶ谷トンネル", url: "https://www.tv-tokyo.co.jp/adomachi/backnumber/20171014/133342.html" }
+    ]
+  },
+  {
+    id: "jidokaikan",
+    name: "東京都児童会館跡",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年 開館／2012年 閉館",
+    lat: 35.6620, lng: 139.7045,
+    area: "渋谷1丁目",
+    summary: "多くの子どもたちが遊んだ大型児童館。",
+    detail: "当時の皇太子（現在の上皇）のご結婚と浩宮（現在の天皇）の誕生を記念し、民間からの寄付で建てられ、1964年3月に開館しました。設計は大谷幸夫です。2012年に閉館して解体され、跡地は再開発が計画されています。",
+    tags: ["子ども", "建築", "再開発"],
+    wiki: ["東京都児童会館"],
+    sources: [
+      { title: "シブヤ経済新聞 東京都児童会館跡地などを一体的に開発へ", url: "https://www.shibukei.com/headline/16580/" }
+    ]
+  },
+  {
+    id: "shutoko-3",
+    name: "首都高速3号渋谷線",
+    era: "postwar",
+    year: 1971,
+    yearLabel: "1964年 一部開通／1971年12月 全線開通",
+    lat: 35.6588, lng: 139.7052,
+    area: "渋谷（六本木通り上空）",
+    summary: "渋谷の空をまたぐ高速道路。東名高速と都心を結んだ。",
+    detail: "東京オリンピックの年の1964年に渋谷付近の区間が開通し、1971年12月21日に渋谷〜用賀間が開通して東名高速道路とつながりました。渋谷の高架橋では、橋脚から左右に桁を張り出していく「やじろべえ工法」が都市部で初めて使われました。",
+    tags: ["道路", "高速道路", "オリンピック"],
+    wiki: ["首都高速3号渋谷線"],
+    sources: [
+      { title: "乗りものニュース 首都高「3号渋谷線」が全通した日", url: "https://trafficnews.jp/post/113559" }
+    ]
+  },
+  {
+    id: "cat-street",
+    name: "キャットストリート（旧渋谷川遊歩道路）",
+    era: "postwar",
+    year: 1967,
+    yearLabel: "1967年（昭和42年）渋谷川にふたをする",
+    lat: 35.6650, lng: 139.7060,
+    area: "神宮前",
+    summary: "渋谷川（穏田川）の暗渠の上にできた、裏原宿のメインストリート。",
+    detail: "北斎が水車を描いた渋谷川（穏田川）は、東京オリンピック後の1967年にふたがされ、その上が遊歩道になりました。正式名称は「旧渋谷川遊歩道路」です。1990年代には「裏原宿」のストリートファッションの中心となりました。名前の由来は「猫の額ほど狭いから」「猫が多いから」など諸説あります。",
+    tags: ["暗渠", "渋谷川", "裏原宿", "ファッション"],
+    wiki: ["旧渋谷川遊歩道路"],
+    sources: [
+      { title: "渋谷文化プロジェクト キャットストリート─かつて水車が回った遊歩道", url: "https://www.shibuyabunka.com/area.php?id=1" },
+      { title: "NEWSポストセブン キャットストリート 諸説ある名前の由来", url: "https://www.news-postseven.com/archives/20220414_1743846.html" }
+    ]
+  },
+  {
+    id: "takeshita-dori",
+    name: "竹下通り",
+    era: "postwar",
+    year: 1975,
+    yearLabel: "1970年代半ばから若者の街に",
+    lat: 35.6703, lng: 139.7038,
+    area: "神宮前（旧竹下町）",
+    summary: "住宅街から「10代の街」へ変わった通り。",
+    detail: "名前は、1965年の住居表示で神宮前1丁目になるまでこの低地にあった町名「竹下町」に由来します。1970年代はじめまでは住宅街でしたが、1970年代半ばから店が増え、1978年開業の「ブティック竹の子」からは竹の子族が生まれるなど、若者文化の発信地となりました。",
+    tags: ["若者文化", "ファッション", "原宿", "地名"],
+    wiki: ["竹下通り"],
+    sources: [
+      { title: "東洋経済オンライン「竹下通り」が\"10代の街\"になるまで", url: "https://toyokeizai.net/articles/-/860839" },
+      { title: "原宿竹下通り商店会", url: "https://www.takeshita-street.com/about.html" }
+    ]
+  },
+  {
+    id: "spain-zaka",
+    name: "スペイン坂と渋谷の坂の名前",
+    era: "postwar",
+    year: 1975,
+    yearLabel: "1975年（昭和50年）命名",
+    lat: 35.6613, lng: 139.6994,
+    area: "宇田川町",
+    summary: "坂に名前を付けて街をつくる──渋谷ならではの坂の名前の由来。",
+    detail: "スペイン坂は1975年、パルコから命名を頼まれた喫茶店の店主が、店の内装にしていたスペインの風景にちなんで名付けました。ほかにも、音楽関係の店が多かった「オルガン坂」、1989年に公募で決まった「間坂（まさか）」、旧町名の金王町を惜しんで名付けられた「金王坂」、かつて「富士見坂」と呼ばれた「宮益坂」など、渋谷は名前の付いた坂の街です。",
+    tags: ["坂", "地名", "街づくり"],
+    wiki: ["スペイン坂"],
+    sources: [
+      { title: "シブテナ スペイン坂の名前の由来？", url: "https://shibutena.com/local_information/2473/" },
+      { title: "東急ステイ渋谷 意外と知らない渋谷 坂道の世界", url: "https://www.tokyustay.co.jp/hotel/SIM/topics/2015/11/post_12.html" }
+    ]
+  },
+  {
+    id: "laforet",
+    name: "ラフォーレ原宿",
+    era: "postwar",
+    year: 1978,
+    yearLabel: "1978年（昭和53年）10月開業",
+    lat: 35.6696, lng: 139.7055,
+    area: "神宮前",
+    summary: "原宿をファッションの中心地にしたファッションビル。",
+    detail: "表参道と明治通りが交わる神宮前交差点の角に開業しました。以前この場所には教会（現在は裏手に移って現存）などがありました。開業により原宿はファッション・アパレルの中心地として広く知られるようになりました。",
+    tags: ["ファッション", "若者文化", "原宿"],
+    wiki: ["ラフォーレ原宿"],
+    sources: [
+      { title: "シブヤ経済新聞 ラフォーレ原宿 30周年", url: "https://www.shibukei.com/column/10/" },
+      { title: "OMOHARAREAL ラフォーレ原宿が聖地である理由", url: "https://omoharareal.com/navi/column/detail/2358" }
+    ]
+  },
+  {
+    id: "ota-museum",
+    name: "太田記念美術館",
+    era: "postwar",
+    year: 1980,
+    yearLabel: "1980年（昭和55年）1月開館",
+    lat: 35.6690, lng: 139.7044,
+    area: "神宮前",
+    summary: "表参道の裏にある浮世絵専門の美術館。",
+    detail: "実業家・五代目太田清蔵の浮世絵コレクションをもとに開館しました。肉筆浮世絵や版画など1万2千点を超える作品を所蔵し、北斎の「穏田の水車」のような渋谷ゆかりの作品もあります。",
+    tags: ["美術館", "浮世絵", "原宿"],
+    wiki: ["太田記念美術館"],
+    sources: [
+      { title: "太田記念美術館", url: "https://www.ukiyoe-ota-muse.jp/" }
+    ]
+  },
+  {
+    id: "kodomo-no-shiro",
+    name: "こどもの城跡と岡本太郎「こどもの樹」",
+    era: "postwar",
+    year: 1985,
+    yearLabel: "1985年 開館／2015年 閉館",
+    lat: 35.6630, lng: 139.7085,
+    area: "神宮前（青山通り）",
+    summary: "国際児童年を記念してつくられた児童施設。",
+    detail: "1979年の国際児童年を記念して当時の厚生省が建設し、1985年に開館しました。建物の前には岡本太郎のモニュメント「こどもの樹」が立っていました。老朽化により2015年に閉館し、跡地の活用が検討されています。",
+    tags: ["子ども", "岡本太郎", "建築"],
+    wiki: ["こどもの城"],
+    sources: [
+      { title: "シブヤ経済新聞 青山通り沿い「こどもの城」閉館へ", url: "https://www.shibukei.com/headline/8839/" },
+      { title: "FASHIONSNAP 「こどもの城」とはどんな施設だったのか", url: "https://www.fashionsnap.com/article/2026-08-18/aoyama-kodomo-no-shiro/" }
+    ]
+  },
+  {
+    id: "watarium",
+    name: "ワタリウム美術館",
+    era: "modern",
+    year: 1990,
+    yearLabel: "1990年（平成2年）9月開館",
+    lat: 35.6710, lng: 139.7115,
+    area: "神宮前（キラー通り）",
+    summary: "スイスの建築家マリオ・ボッタが設計した現代美術館。",
+    detail: "通称「キラー通り」沿いの三角形の土地に建つ私設の美術館で、国際的な現代アートを多く紹介しています。",
+    tags: ["美術館", "現代アート", "建築"],
+    wiki: ["ワタリウム美術館"],
+    sources: [
+      { title: "GO TOKYO ワタリウム美術館", url: "https://www.gotokyo.org/jp/spot/169/index.html" }
+    ]
+  },
+  {
+    id: "shibuya-kei",
+    name: "「渋谷系」とレコードの街・宇田川町",
+    era: "modern",
+    year: 1993,
+    yearLabel: "1990年代",
+    lat: 35.6622, lng: 139.6980,
+    area: "宇田川町",
+    summary: "レコード店がひしめき、「渋谷系」の音楽が生まれた街。",
+    detail: "1990年代、宇田川町には多くのレコード店が軒を連ね「レコードの聖地」と呼ばれ、クラブカルチャーの中心地でした。HMV渋谷などの大型店から広がった音楽は「渋谷系」と呼ばれるムーブメントになりました。HMV渋谷は2010年に閉店しましたが、2014年に中古レコード店として宇田川町に戻っています。",
+    tags: ["音楽", "渋谷系", "レコード", "若者文化"],
+    wiki: ["渋谷系"],
+    sources: [
+      { title: "ぴあ音楽 渋谷系を掘り下げる", url: "https://lp.p.pia.jp/article/news/85991/index.html" },
+      { title: "OTOTOY レコードの聖地・宇田川町", url: "https://ototoy.jp/news/76118" }
+    ]
+  },
+  {
+    id: "asu-no-shinwa",
+    name: "岡本太郎「明日の神話」",
+    era: "modern",
+    year: 2008,
+    yearLabel: "2008年（平成20年）11月から公開",
+    lat: 35.6585, lng: 139.7005,
+    area: "渋谷（渋谷マークシティ連絡通路）",
+    summary: "メキシコで30年以上行方不明だった巨大壁画。",
+    detail: "岡本太郎が1968〜69年ごろメキシコのホテルのために描いた、原爆の悲劇とそれを乗り越える人間の強さを描いた壁画です。ホテルが完成せず行方不明になっていましたが、2003年にメキシコ郊外の資材置き場で見つかりました。修復を経て恒久設置先に渋谷が選ばれ、2008年から駅の連絡通路で公開されています。",
+    tags: ["アート", "岡本太郎", "原爆"],
+    wiki: ["明日の神話"],
+    sources: [
+      { title: "岡本太郎記念館 明日の神話", url: "https://taro-okamoto.or.jp/asunoshinwa/" },
+      { title: "明日の神話保全継承機構 『明日の神話』軌跡", url: "https://www.asunoshinwa.or.jp/itinerary/" }
+    ]
+  },
+  {
+    id: "toyoko-underground",
+    name: "東横線の地下化と旧線路跡",
+    era: "modern",
+    year: 2013,
+    yearLabel: "2013年（平成25年）3月16日",
+    lat: 35.6540, lng: 139.7035,
+    area: "渋谷〜代官山（東横線の旧線路跡）",
+    summary: "かまぼこ屋根の地上駅から、一夜で地下へ。",
+    detail: "かまぼこ形の屋根で親しまれた東横線の地上の渋谷駅は、2013年3月16日の終電後、約1,200人による一晩の切り替え工事で地下5階の新駅に移り、東京メトロ副都心線との直通運転が始まりました。渋谷〜代官山間の地上の線路跡には渋谷ストリームや遊歩道がつくられています。",
+    tags: ["鉄道", "東横線", "再開発"],
+    wiki: ["東急東横線"],
+    sources: [
+      { title: "渋谷文化プロジェクト 東横線が一夜で地下化", url: "https://www.shibuyabunka.com/special/201403/part1.html" },
+      { title: "鉄道コム 東横線渋谷駅が地下化、副都心線と直通運転を開始", url: "https://www.tetsudo.com/column/453/" }
+    ]
+  },
+  {
+    id: "partnership",
+    name: "全国初の同性パートナーシップ証明",
+    era: "modern",
+    year: 2015,
+    yearLabel: "2015年（平成27年）4月1日施行",
+    lat: 35.6648, lng: 139.6990,
+    area: "宇田川町（渋谷区役所）",
+    summary: "同性カップルを「結婚に相当する関係」と認める、全国初の条例。",
+    detail: "2015年3月、渋谷区議会は「渋谷区男女平等及び多様性を尊重する社会を推進する条例」を可決しました。同性カップルを結婚に相当する関係と認め、区が「パートナーシップ証明書」を交付する全国初の制度で、その後、全国の自治体に同様の制度が広がるきっかけとなりました。",
+    tags: ["人権", "多様性", "条例", "LGBTQ"],
+    sources: [
+      { title: "渋谷区 渋谷区パートナーシップ証明", url: "https://www.city.shibuya.tokyo.jp/kusei/shisaku/lgbt/partnership.html" },
+      { title: "日本経済新聞 「同性婚」に証明書 東京・渋谷区、全国初の条例成立", url: "https://www.nikkei.com/article/DGXLASDG31H7P_R30C15A3CZ8000/" }
+    ]
   }
 ];
 
@@ -1548,6 +1864,27 @@ window.SPOTS = [
  *   dark   : 事件・事故・災害などの出来事なら true
  */
 window.TIMELINE = [
+  { year: 1185,  label: "1185〜90年頃", text: "長泉寺が創建されたと伝わる", spot: "chosenji" },
+  { year: 1561,  label: "1561年", text: "幡ヶ谷に荘厳寺が創建されたと伝わる", spot: "shogonji" },
+  { year: 1747,  label: "1747年", text: "荘厳寺に不動明王像が移され「幡ヶ谷不動尊」に", spot: "shogonji" },
+  { year: 1896,  label: "1896年", text: "国木田独歩が渋谷村に住み、『武蔵野』の舞台に", spot: "doppo" },
+  { year: 1921.5, label: "1921年", text: "竹久夢二が宇田川町に住む（〜1924年）", spot: "yumeji" },
+  { year: 1933,  label: "1933年", text: "帝都電鉄（現・井の頭線）が渋谷〜井の頭公園間で開業", spot: "inokashira-line" },
+  { year: 1964.2, label: "1964年3月", text: "千駄ヶ谷トンネル完成。東京都児童会館開館", spot: "sendagaya-tunnel" },
+  { year: 1965.2, label: "1965年", text: "住居表示で竹下町などが「神宮前」に", spot: "takeshita-dori" },
+  { year: 1967.5, label: "1967年", text: "渋谷川（穏田川）にふたがされ、のちのキャットストリートに", spot: "cat-street" },
+  { year: 1969,  label: "1969年5月", text: "路面電車「玉電」が廃止される", spot: "inokashira-line" },
+  { year: 1971.5, label: "1971年12月", text: "首都高3号渋谷線が全線開通、東名高速とつながる", spot: "shutoko-3" },
+  { year: 1975,  label: "1975年", text: "パルコの依頼で「スペイン坂」と命名", spot: "spain-zaka" },
+  { year: 1978,  label: "1978年", text: "ラフォーレ原宿開業", spot: "laforet" },
+  { year: 1980.1, label: "1980年", text: "浮世絵の太田記念美術館開館", spot: "ota-museum" },
+  { year: 1985,  label: "1985年", text: "青山通りに「こどもの城」開館（2015年閉館）", spot: "kodomo-no-shiro" },
+  { year: 1990.5, label: "1990年", text: "ワタリウム美術館開館", spot: "watarium" },
+  { year: 1993,  label: "1990年代", text: "宇田川町が「レコードの聖地」に。「渋谷系」ブーム", spot: "shibuya-kei" },
+  { year: 2008,  label: "2008年", text: "岡本太郎「明日の神話」が渋谷駅の連絡通路で公開", spot: "asu-no-shinwa" },
+  { year: 2012.2, label: "2012年", text: "東京都児童会館閉館", spot: "jidokaikan" },
+  { year: 2013,  label: "2013年3月16日", text: "東横線渋谷駅が地下化、副都心線と直通運転", spot: "toyoko-underground" },
+  { year: 2015,  label: "2015年4月", text: "全国初の同性パートナーシップ証明の条例が施行", spot: "partnership" },
   { year: 1893,  label: "1893年頃", text: "明治天皇が昭憲皇太后のために代々木の御料地に庭園（現・明治神宮御苑）を整える", spot: "kiyomasa-ido" },
   { year: 1906,  label: "1906年", text: "甲武鉄道の代々木駅が開業", spot: "yoyogi-station" },
   { year: 1909,  label: "1909年", text: "高野辰之が代々木山谷に住み始める", spot: "takano-tatsuyuki" },
