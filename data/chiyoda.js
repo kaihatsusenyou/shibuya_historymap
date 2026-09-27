@@ -12,9 +12,9 @@ var DISTRICTS = [
   { key: "kokyo", label: "皇居・北の丸・千鳥ヶ淵", keywords: ["皇居", "北の丸", "千鳥ヶ淵", "桜田門"] },
   { key: "marunouchi", label: "丸の内・大手町・有楽町", keywords: ["丸の内", "大手町", "有楽町", "東京駅"] },
   { key: "nagatacho", label: "永田町・霞が関・日比谷", keywords: ["永田町", "霞が関", "日比谷", "内幸町", "三宅坂"] },
-  { key: "kudan", label: "九段・麹町・番町", keywords: ["九段", "麹町", "番町"] },
+  { key: "kudan", label: "九段・麹町・番町・紀尾井町・飯田橋", keywords: ["九段", "麹町", "番町", "紀尾井町", "飯田橋", "富士見"] },
   { key: "akihabara", label: "秋葉原・外神田・万世橋", keywords: ["秋葉原", "外神田", "万世橋"] },
-  { key: "kanda", label: "神田・神保町・御茶ノ水", keywords: ["神田", "神保町", "御茶ノ水", "駿河台", "湯島"] }
+  { key: "kanda", label: "神田・神保町・御茶ノ水", keywords: ["神田", "神保町", "御茶ノ水", "駿河台", "湯島", "岩本町"] }
 ];
 
 var SPOTS = [
@@ -751,10 +751,345 @@ var SPOTS = [
     sources: [
       { title: "ウィキニュース 東京・秋葉原で通り魔事件", url: "https://ja.wikinews.org/wiki/%E6%9D%B1%E4%BA%AC%E3%83%BB%E7%A7%8B%E8%91%89%E5%8E%9F%E3%81%A7%E9%80%9A%E3%82%8A%E9%AD%94%E4%BA%8B%E4%BB%B6_7%E4%BA%BA%E6%AD%BB%E3%81%AC%E3%80%81%E7%8A%AF%E4%BA%BA%E9%80%AE%E6%8D%95" }
     ]
+  },
+  // ---------------- 追加（第2弾） ----------------
+  {
+    id: "yurakucho-name",
+    name: "「有楽町」の地名と織田有楽斎",
+    era: "edo",
+    year: 1600,
+    yearLabel: "慶長年間（1596〜1615年）",
+    lat: 35.6755, lng: 139.7615,
+    area: "有楽町",
+    summary: "織田信長の弟・有楽斎の屋敷跡「有楽原」が由来とされる。",
+    detail: "江戸時代初期、茶人としても知られる織田信長の弟・織田有楽斎の屋敷があり、その後空き地となった場所が「有楽の原（有楽原）」と呼ばれたことが由来とされます。1872年に「有楽町」という町名が生まれました。ただし、有楽斎が実際にここに住んだかどうかは疑わしいとする説もあります。",
+    tags: ["地名", "織田有楽斎", "茶人"],
+    wiki: ["有楽町"],
+    sources: [
+      { title: "nippon.com 有楽町（JY30）", url: "https://www.nippon.com/ja/japan-topics/c13302/" },
+      { title: "コトバンク 有楽町", url: "https://kotobank.jp/word/%E6%9C%89%E6%A5%BD%E7%94%BA-144903" }
+    ]
+  },
+  {
+    id: "hanzomon",
+    name: "半蔵門と服部半蔵",
+    era: "edo",
+    year: 1600,
+    yearLabel: "江戸時代初期",
+    lat: 35.6853, lng: 139.7440,
+    area: "皇居（半蔵門）",
+    summary: "徳川家康に仕えた服部半蔵の名がついた門。",
+    detail: "徳川家に仕えた服部半蔵（正成・正就の父子）がこの門の警備を担い、門の外に配下の伊賀同心の屋敷があったことが名の由来とされます。山王祭の大きな象の山車が半分しか入らなかったからという珍しい説もあります。",
+    tags: ["城門", "服部半蔵", "忍者"],
+    wiki: ["半蔵門"],
+    sources: [
+      { title: "日本実業出版社 半蔵門の由来と服部半蔵", url: "https://www.njg.co.jp/column/column-36171/" }
+    ]
+  },
+  {
+    id: "banchou",
+    name: "番町・麹町の地名と「番町皿屋敷」",
+    era: "edo",
+    year: 1610,
+    yearLabel: "江戸時代初期〜",
+    lat: 35.6880, lng: 139.7380,
+    area: "番町",
+    summary: "将軍の親衛隊「大番組」の屋敷町。怪談「皿屋敷」の舞台にも。",
+    detail: "徳川家康は江戸城の西側を守るため、この地に「大番組」と呼ばれる旗本を住まわせました。一番組から六番組まであったことが、今の一番町〜六番町の由来です。隣の麹町は、麹屋が多かったからとも、武蔵国府（府中）へ向かう「国府路（こうじ）」からともいわれます。皿を割った罪で殺されたお菊の幽霊が井戸で皿を数える怪談「番町皿屋敷」は、歌舞伎の演目としても知られています。",
+    tags: ["地名", "旗本", "怪談", "歌舞伎"],
+    wiki: ["番町"],
+    sources: [
+      { title: "TOKYO RENT 麹町・番町 地名で読む街の歴史", url: "https://tokyorent.jp/column/17/" },
+      { title: "歌舞伎への誘い 番町皿屋敷", url: "https://www2.ntj.jac.go.jp/unesco/kabuki/jp/play/play19.html" }
+    ]
+  },
+  {
+    id: "tayasumon",
+    name: "田安門",
+    era: "edo",
+    year: 1636,
+    yearLabel: "1636年（寛永13年）",
+    lat: 35.6925, lng: 139.7508,
+    area: "北の丸",
+    summary: "江戸城に現存する最古の建造物。国の重要文化財。",
+    detail: "北の丸の北側、靖国通りに面した門で、現在の門は1636年に建てられたものです。旧江戸城に残る建物としては最も古く、1961年に国の重要文化財に指定されました。日本武道館への入口として多くの人が通ります。",
+    tags: ["城門", "重要文化財", "江戸城"],
+    wiki: ["田安門"],
+    sources: [
+      { title: "環境省 田安門と清水門", url: "https://www.env.go.jp/garden/kokyogaien/1_intro/his_09.html" }
+    ]
+  },
+  {
+    id: "kioi-name",
+    name: "「紀尾井町」の地名",
+    era: "edo",
+    year: 1650,
+    yearLabel: "江戸時代初期〜",
+    lat: 35.6808, lng: 139.7365,
+    area: "紀尾井町",
+    summary: "紀伊・尾張・井伊の三家の屋敷があったことから一字ずつ。",
+    detail: "江戸時代、この一帯には紀伊徳川家の上屋敷、尾張徳川家の中屋敷、彦根藩井伊家の中屋敷がありました。それぞれから一字ずつ取って「紀尾井町」と名付けられました。",
+    tags: ["地名", "大名屋敷", "御三家"],
+    wiki: ["紀尾井町"],
+    sources: [
+      { title: "千代田区 町名由来板 紀尾井町", url: "https://www.city.chiyoda.lg.jp/koho/kurashi/volunteer/chomeiyuraiban/choumei/kioi.html" }
+    ]
+  },
+  {
+    id: "otamagaike",
+    name: "お玉ヶ池種痘所跡（東京大学医学部発祥の地）",
+    era: "edo",
+    year: 1858,
+    yearLabel: "1858年（安政5年）",
+    lat: 35.6945, lng: 139.7760,
+    area: "神田岩本町",
+    summary: "天然痘の予防接種のため、蘭方医たちが自費で開いた施設。",
+    detail: "伊東玄朴や大槻俊斎ら江戸の蘭方医82人が資金を出し合い、天然痘を予防する種痘を行う施設をつくりました。開設から半年で火事にあって移転しましたが、1860年に幕府直轄となり、西洋医学所・大学東校などを経て、1877年に東京大学医学部となりました。",
+    tags: ["医学", "感染症", "東京大学"],
+    wiki: ["種痘所"],
+    sources: [
+      { title: "Visit Chiyoda お玉ヶ池種痘所のあった所（東大医学部発祥の地）", url: "https://visit-chiyoda.tokyo/app/spot/detail/43" }
+    ]
+  },
+  {
+    id: "joto-myodai",
+    name: "常燈明台（九段の高燈籠）",
+    era: "meiji",
+    year: 1871,
+    yearLabel: "1871年（明治4年）",
+    lat: 35.6955, lng: 139.7478,
+    area: "九段",
+    summary: "品川沖の船の目印にもなった、和洋折衷の灯籠。",
+    detail: "招魂社（のちの靖国神社）の灯籠として建てられた高さ16.8mの塔で、下部は和風、上部は洋風の和洋折衷です。当時の九段坂の上からは筑波山や房総の山まで見渡せ、品川沖を行く船の灯台の役目も果たしました。1930年に道路工事のため現在地に移されました。",
+    tags: ["灯台", "文明開化", "九段"],
+    wiki: ["常灯明台"],
+    sources: [
+      { title: "千代田区文化財 常燈明台", url: "https://www.edo-chiyoda.jp/bunkazaihogonotorikumi/bunkazaihogochosain/hogocho2019/1/365.html" }
+    ]
+  },
+  {
+    id: "takebashi",
+    name: "竹橋事件",
+    era: "meiji",
+    dark: "事件",
+    year: 1878,
+    yearLabel: "1878年（明治11年）8月23日",
+    lat: 35.6905, lng: 139.7565,
+    area: "北の丸（竹橋）",
+    summary: "日本の軍隊で初めての反乱。55人が死刑になった。",
+    detail: "竹橋の近衛砲兵大隊の兵士200人余りが、西南戦争で戦ったのに恩賞がなく、給与も削られたことに不満を持って蜂起しました。上官を殺害し、仮皇居に向かって天皇に直訴しようとしましたが、翌朝までに鎮圧されました。55人が死刑となる大事件で、その後の軍の規律強化につながりました。",
+    tags: ["事件", "反乱", "軍隊"],
+    wiki: ["竹橋事件"],
+    sources: [
+      { title: "コトバンク 竹橋事件", url: "https://kotobank.jp/word/%E7%AB%B9%E6%A9%8B%E4%BA%8B%E4%BB%B6-93099" }
+    ]
+  },
+  {
+    id: "kioizaka",
+    name: "紀尾井坂の変（大久保利通の暗殺）",
+    era: "meiji",
+    dark: "事件",
+    year: 1878,
+    yearLabel: "1878年（明治11年）5月14日",
+    lat: 35.6795, lng: 139.7375,
+    area: "紀尾井町（清水谷公園）",
+    summary: "明治政府の中心人物・大久保利通が、登庁途中に斬殺された。",
+    detail: "維新三傑の一人で内務卿の大久保利通が、馬車で仮皇居へ向かう途中、紀尾井町の清水谷で不平士族6人に襲われ、御者とともに亡くなりました。西南戦争の翌年のことで、政府の強権的な政治に対する不満が背景にありました。近くの清水谷公園に大久保の哀悼碑があります。",
+    highlights: ["清水谷公園の大久保利通哀悼碑"],
+    tags: ["事件", "暗殺", "明治維新"],
+    wiki: ["紀尾井坂の変"],
+    sources: [
+      { title: "千代田区文化財 大久保利通の哀悼碑", url: "https://www.edo-chiyoda.jp/bunkazaihogonotorikumi/bunkazaihogochosain/hogocho2019/1/375.html" },
+      { title: "コトバンク 紀尾井坂の変", url: "https://kotobank.jp/word/%E7%B4%80%E5%B0%BE%E4%BA%95%E5%9D%82%E3%81%AE%E5%A4%89-49910" }
+    ]
+  },
+  {
+    id: "tokyo-daijingu",
+    name: "東京大神宮（神前結婚式発祥の地）",
+    era: "meiji",
+    year: 1880,
+    yearLabel: "1880年 日比谷に創建／1928年 飯田橋へ",
+    lat: 35.7000, lng: 139.7460,
+    area: "飯田橋・富士見",
+    summary: "今では当たり前の「神前結婚式」を一般に広めた神社。",
+    detail: "1880年、伊勢神宮を東京で遥拝するための神殿として日比谷に創建され「日比谷大神宮」と呼ばれました。1900年、皇太子（のちの大正天皇）の結婚を記念して一般向けの神前結婚式を始め、現在の神前式の原型となりました。関東大震災で被災し、1928年に現在地へ移りました。",
+    tags: ["神社", "結婚式", "縁結び"],
+    wiki: ["東京大神宮"],
+    sources: [
+      { title: "東京都 ユニークベニュー 東京大神宮", url: "https://uniquevenues-jp.metro.tokyo.lg.jp/venues/private/21901/" }
+    ]
+  },
+  {
+    id: "suijun-genten",
+    name: "日本水準原点",
+    era: "meiji",
+    year: 1891,
+    yearLabel: "1891年（明治24年）",
+    lat: 35.6782, lng: 139.7458,
+    area: "永田町",
+    summary: "日本中の「標高」の基準点。",
+    detail: "日本の土地の高さ（標高）を測る基準として、陸軍参謀本部陸地測量部が1891年に設けました。江戸時代は彦根藩井伊家の屋敷があった場所です。原点を守る石造りの「標庫」は都内に現存する最古級の近代洋風建築で、原点とともに国の重要文化財になっています。",
+    tags: ["測量", "建築", "重要文化財"],
+    wiki: ["日本水準原点"],
+    sources: [
+      { title: "土木学会 選奨土木遺産 日本水準原点と日本水準原点標庫", url: "https://committees.jsce.or.jp/heritage/node/1042" }
+    ]
+  },
+  {
+    id: "akarenga",
+    name: "法務省旧本館（赤れんが棟）",
+    era: "meiji",
+    year: 1895,
+    yearLabel: "1895年 竣工／1945年 焼失／1994年 復原",
+    lat: 35.6755, lng: 139.7525,
+    area: "霞が関",
+    summary: "官庁街に残るドイツ風のレンガ庁舎。空襲で焼け、復原された。",
+    detail: "ドイツの建築家エンデとベックマンの設計で、旧司法省の庁舎として1895年に完成しました。1945年の空襲でレンガの壁と床を残して焼失し、戦後の改修を経て、1994年に創建時の姿に復原されました。同年、国の重要文化財に指定されています。",
+    tags: ["建築", "重要文化財", "空襲"],
+    wiki: ["法務省旧本館"],
+    sources: [
+      { title: "法務省 赤れんが棟物語", url: "https://www.moj.go.jp/housei/tosho-tenji/housei06_00005.html" }
+    ]
+  },
+  {
+    id: "konoe-shidan",
+    name: "旧近衛師団司令部庁舎",
+    era: "meiji",
+    year: 1910,
+    yearLabel: "1910年（明治43年）",
+    lat: 35.6905, lng: 139.7542,
+    area: "北の丸",
+    summary: "天皇を守る近衛師団の司令部だったレンガ建築。国の重要文化財。",
+    detail: "陸軍技師・田村鎮の設計で1910年に完成した、レンガ造り2階建てのゴシック風の建物です。1972年に国の重要文化財に指定され、その後は東京国立近代美術館の工芸館などとして使われました。",
+    tags: ["建築", "重要文化財", "陸軍"],
+    wiki: ["旧近衛師団司令部庁舎"],
+    sources: [
+      { title: "東京国立近代美術館 重要文化財 旧近衛師団司令部庁舎", url: "https://www.momat.go.jp/architecture/konoeshidan" }
+    ]
+  },
+  {
+    id: "hara-takashi",
+    name: "東京駅の首相遭難現場（原敬・浜口雄幸）",
+    era: "meiji",
+    dark: "事件",
+    year: 1921,
+    yearLabel: "1921年11月4日／1930年11月14日",
+    lat: 35.6805, lng: 139.7655,
+    area: "丸の内（東京駅）",
+    summary: "東京駅では、2人の首相がテロに倒れた。",
+    detail: "1921年11月4日、原敬首相が東京駅の乗車口（現在の丸の内南口）で刺殺されました。1930年11月14日には、ロンドン海軍軍縮条約の締結に反発した男に浜口雄幸首相が駅のホームで撃たれ、翌年亡くなりました。駅の床には、それぞれの現場を示す印とプレートがあります。",
+    highlights: ["丸の内南口の床の印とプレート", "中央通路の柱のプレート"],
+    tags: ["事件", "テロ", "首相", "東京駅"],
+    sources: [
+      { title: "おたくま経済新聞 東京駅に残るテロの歴史 2つの「首相遭難現場」", url: "https://otakuma.net/archives/2021110606.html" }
+    ]
+  },
+  {
+    id: "sudacho",
+    name: "神田須田町の老舗と焼け残った町並み",
+    era: "prewar",
+    year: 1930,
+    yearLabel: "大正末期〜昭和初期の建物",
+    lat: 35.6958, lng: 139.7692,
+    area: "神田須田町・淡路町",
+    summary: "空襲を免れた一角に、そば・あんこう鍋・甘味の老舗が並ぶ。",
+    detail: "神田須田町の一角は、東京の下町では数少ない空襲を免れた地域で、かんだやぶそば（1923年）、神田まつや、ぼたん（1929年）、竹むら（1930年）、いせ源本館（1932年）など、大正末期から昭和初期の木造の店舗が残っていました。かんだやぶそばは2013年の火災で店舗の一部を焼失し、翌年に建て替えて営業を再開しています。",
+    tags: ["老舗", "建築", "食", "戦災"],
+    sources: [
+      { title: "日本経済新聞 かんだやぶそば、営業再開", url: "https://www.nikkei.com/article/DGXLASDG20012_Q4A021C1CC0000/" },
+      { title: "アーバンライフメトロ 昭和初期の建築が密集する神田須田町", url: "https://urbanlifemetro.jp/lifestye/5191/" }
+    ]
+  },
+  {
+    id: "tokyo-forum",
+    name: "旧東京都庁舎跡（東京国際フォーラム）",
+    era: "postwar",
+    year: 1957,
+    yearLabel: "1957年 丹下健三の都庁舎／1991年 新宿へ／1997年 国際フォーラム",
+    lat: 35.6768, lng: 139.7638,
+    area: "丸の内",
+    summary: "丹下健三設計の旧都庁舎の跡に建つ、ガラスの船のような建物。",
+    detail: "1957年、丹下健三の設計による東京都庁舎がここに完成しました。1991年に都庁が新宿へ移ると、跡地には東京初のコンベンション・アートセンターとして東京国際フォーラムが建てられ、1997年に開館しました。",
+    tags: ["建築", "丹下健三", "都庁"],
+    wiki: ["東京国際フォーラム"],
+    sources: [
+      { title: "東京国際フォーラム 誕生までの経緯", url: "https://www.t-i-forum.co.jp/about/history/" },
+      { title: "アーバンライフ東京 激動の150年を駆け抜けた「東京庁舎」の歴史", url: "https://urbanlife.tokyo/post/72196/" }
+    ]
+  },
+  {
+    id: "newotani",
+    name: "ホテルニューオータニ",
+    era: "postwar",
+    year: 1964,
+    yearLabel: "1964年（昭和39年）9月1日開業",
+    lat: 35.6800, lng: 139.7345,
+    area: "紀尾井町",
+    summary: "東京オリンピックに向けて建てられた、日本初の高層ホテル。",
+    detail: "東京オリンピックで訪れる外国人客を迎えるため、国の要請を受けて伏見宮邸の跡地に建てられ、開業当時は「東洋一」といわれました。敷地は江戸時代の井伊家中屋敷で、日本庭園はそのころから続くものです。",
+    tags: ["ホテル", "オリンピック", "庭園"],
+    wiki: ["ホテルニューオータニ"],
+    sources: [
+      { title: "ホテルニューオータニの歴史", url: "https://www.newotani.co.jp/tokyo/wedding/advantage/history/" }
+    ]
+  },
+  {
+    id: "quartier-latin",
+    name: "神田カルチェ・ラタン闘争",
+    era: "postwar",
+    dark: "社会運動",
+    year: 1968,
+    yearLabel: "1968年（昭和43年）6月21日",
+    lat: 35.6975, lng: 139.7615,
+    area: "駿河台",
+    summary: "学生たちが明大通りにバリケードを築き、「解放区」をつくろうとした。",
+    detail: "パリの五月革命をまねて、学生運動の一派が大学の集まる神田駿河台の明大通りにバリケードを築き、機動隊と衝突しました。騒ぎで御茶ノ水駅の電車が1時間近く止まり、約20万人に影響が出ました。",
+    tags: ["学生運動", "デモ", "駿河台"],
+    wiki: ["神田カルチェ・ラタン闘争"],
+    sources: [
+      { title: "Weblio 神田カルチェ・ラタン闘争", url: "https://www.weblio.jp/content/%E7%A5%9E%E7%94%B0%E3%82%AB%E3%83%AB%E3%83%81%E3%82%A7%E3%83%BB%E3%83%A9%E3%82%BF%E3%83%B3%E9%97%98%E4%BA%89" }
+    ]
+  },
+  {
+    id: "showakan",
+    name: "昭和館",
+    era: "modern",
+    year: 1999,
+    yearLabel: "1999年（平成11年）3月開館",
+    lat: 35.6940, lng: 139.7512,
+    area: "九段",
+    summary: "戦中・戦後の暮らしの苦労を伝える国立の博物館。",
+    detail: "戦争中と戦後の混乱期（おおむね昭和10年から30年代）に人々が経験した暮らしの苦労を、次の世代に伝えるための国立の施設です。当時の生活用品や写真、映像などを集めて展示しています。",
+    tags: ["博物館", "戦争", "暮らし"],
+    wiki: ["昭和館"],
+    sources: [
+      { title: "GO TOKYO 昭和館", url: "https://www.gotokyo.org/jp/spot/646/index.html" }
+    ]
   }
 ];
 
 var TIMELINE = [
+  { year: 1600, label: "慶長年間", text: "織田有楽斎の屋敷跡「有楽原」（有楽町の由来）", spot: "yurakucho-name" },
+  { year: 1610, label: "江戸時代初期", text: "江戸城の西を守る大番組が住み「番町」が生まれる", spot: "banchou" },
+  { year: 1636, label: "1636年", text: "田安門が建てられる（江戸城に現存する最古の建物）", spot: "tayasumon" },
+  { year: 1858, label: "1858年", text: "蘭方医たちがお玉ヶ池に種痘所を開く（東大医学部の起源）", spot: "otamagaike" },
+  { year: 1871, label: "1871年", text: "九段に常燈明台が建てられる", spot: "joto-myodai" },
+  { year: 1878.4, label: "1878年5月14日", text: "紀尾井坂の変。大久保利通が暗殺される", spot: "kioizaka", dark: true },
+  { year: 1878.6, label: "1878年8月23日", text: "竹橋事件。近衛砲兵が反乱を起こす", spot: "takebashi", dark: true },
+  { year: 1880, label: "1880年", text: "日比谷に東京大神宮が創建される", spot: "tokyo-daijingu" },
+  { year: 1891, label: "1891年", text: "日本水準原点が設けられる", spot: "suijun-genten" },
+  { year: 1895, label: "1895年", text: "旧司法省庁舎（赤れんが棟）が完成", spot: "akarenga" },
+  { year: 1900, label: "1900年", text: "東京大神宮が一般向けの神前結婚式を始める", spot: "tokyo-daijingu" },
+  { year: 1910, label: "1910年", text: "近衛師団司令部庁舎が完成", spot: "konoe-shidan" },
+  { year: 1921, label: "1921年11月4日", text: "原敬首相が東京駅で刺殺される", spot: "hara-takashi", dark: true },
+  { year: 1930, label: "1930年11月14日", text: "浜口雄幸首相が東京駅で撃たれる", spot: "hara-takashi", dark: true },
+  { year: 1957, label: "1957年", text: "丸の内に丹下健三設計の東京都庁舎が完成", spot: "tokyo-forum" },
+  { year: 1964.7, label: "1964年9月", text: "紀尾井町にホテルニューオータニ開業", spot: "newotani" },
+  { year: 1968.5, label: "1968年6月21日", text: "神田カルチェ・ラタン闘争。明大通りにバリケード", spot: "quartier-latin", dark: true },
+  { year: 1991, label: "1991年", text: "東京都庁が丸の内から新宿へ移る", spot: "tokyo-forum" },
+  { year: 1994, label: "1994年", text: "法務省旧本館（赤れんが棟）が復原され、重要文化財に", spot: "akarenga" },
+  { year: 1997, label: "1997年", text: "旧都庁舎跡に東京国際フォーラム開館", spot: "tokyo-forum" },
+  { year: 1999, label: "1999年", text: "九段に昭和館が開館", spot: "showakan" },
   { year: 730,  label: "730年（社伝）", text: "神田明神が現在の大手町に創建される", spot: "kanda-myojin" },
   { year: 940,  label: "940年頃（伝承）", text: "平将門の首が飛来したという将門塚の伝説", spot: "masakado" },
   { year: 1457, label: "1457年", text: "太田道灌が江戸城を築く", spot: "edo-castle" },
