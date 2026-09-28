@@ -1619,7 +1619,8 @@ var SPOTS = [
       { title: "Wikipedia 番町文人通り", url: "https://ja.wikipedia.org/wiki/%E7%95%AA%E7%94%BA%E6%96%87%E4%BA%BA%E9%80%9A%E3%82%8A" },
       { title: "千代田区文化財サイト 番町文人通り", url: "https://www.edo-chiyoda.jp/bunkazaihogonotorikumi/bunkazaihogochosain/hogocho2019/1/356.html" }
     ]
-  }
+  },
+
 ];
 
 var TIMELINE = [
