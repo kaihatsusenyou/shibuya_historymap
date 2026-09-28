@@ -1459,10 +1459,178 @@ var SPOTS = [
       { title: "Wikipedia 山の上ホテル", url: "https://ja.wikipedia.org/wiki/%E5%B1%B1%E3%81%AE%E4%B8%8A%E3%83%9B%E3%83%86%E3%83%AB" },
       { title: "明治大学 山の上ホテル関連展示", url: "https://www.meiji.ac.jp/koho/press/2025/qfki0t000001r4je.html" }
     ]
+  },
+  {
+    id: "togo-park",
+    name: "東郷元帥記念公園（東郷平八郎邸跡）",
+    era: "meiji",
+    year: 1881,
+    yearLabel: "1881〜1934年 東郷邸／1938年 公園に",
+    lat: 35.6915, lng: 139.7415,
+    area: "三番町",
+    summary: "日露戦争の日本海海戦を指揮した東郷平八郎が53年間暮らした屋敷の跡。",
+    detail: "連合艦隊司令長官として日露戦争の日本海海戦でバルチック艦隊を破った東郷平八郎は、1881年から1934年に86歳で亡くなるまで、53年間この三番町の屋敷で暮らしました。国葬の日には、東郷邸から葬儀場の日比谷公園までの沿道を百数十万人が見送ったといわれます。没後、屋敷は東京市に寄付され、1938年に「東郷元帥記念公園」として開園しました。高低差のある園内には、東郷邸にあったライオン像や力石が残っています。英雄として神格化された東郷の存在は、その後の軍国主義の時代にも大きく利用されました。",
+    highlights: ["東郷邸のライオン像と力石", "国葬の沿道に百数十万人"],
+    tags: ["公園", "日露戦争", "海軍", "屋敷跡"],
+    wiki: ["東郷元帥記念公園", "東郷平八郎"],
+    sources: [
+      { title: "Visit Chiyoda 東郷元帥記念公園", url: "https://visit-chiyoda.tokyo/app/spot/detail/447" }
+    ]
+  },
+  {
+    id: "izumi-kyoka-arishima",
+    name: "泉鏡花旧居跡と有島三兄弟の家（六番町）",
+    era: "meiji",
+    year: 1910.4,
+    yearLabel: "1896年 有島家／1910〜1939年 泉鏡花",
+    lat: 35.6885, lng: 139.731,
+    area: "六番町",
+    summary: "通りをはさんで、泉鏡花と、有島武郎・有島生馬・里見弴の三兄弟が暮らした。",
+    detail: "1910年、作家の泉鏡花は、薄暗い崖下の家から下六番町の2階建ての家に移り、1939年に亡くなるまでここで暮らしました。『夜叉ヶ池』や『天守物語』など代表作の多くがこの家で生まれています。通りの向かいには、1896年に実業家の有島武が買った屋敷があり、作家の有島武郎、画家の有島生馬、作家の里見弴の三兄弟がここで育ちました。一つの通りに、これほど多くの文学者の暮らしが重なっていた番町ならではの場所です。",
+    highlights: ["『夜叉ヶ池』『天守物語』", "有島三兄弟が育った家"],
+    tags: ["文学", "作家", "旧居跡"],
+    wiki: ["泉鏡花"],
+    sources: [
+      { title: "千代田区 まちの記憶保存プレート 泉鏡花旧居跡", url: "https://www.city.chiyoda.lg.jp/koho/kurashi/volunteer/kioku/izumikyoka.html" },
+      { title: "千代田区 町名由来板 六番町", url: "https://www.city.chiyoda.lg.jp/koho/kurashi/volunteer/chomeiyuraiban/choumei/rokuban.html" }
+    ]
+  },
+  {
+    id: "taki-rentaro",
+    name: "滝廉太郎居住地跡（「荒城の月」が生まれた場所）",
+    era: "meiji",
+    year: 1894,
+    yearLabel: "1894〜1901年",
+    lat: 35.686, lng: 139.7395,
+    area: "一番町（袖摺坂の近く）",
+    summary: "「荒城の月」「花」の作曲家・滝廉太郎が青年時代を過ごした場所。",
+    detail: "作曲家の滝廉太郎は、1894年から1901年にドイツへ留学するまで、一番町のいとこの家に住んでいました。ここで東京音楽学校（今の東京藝術大学）に通いながら、組歌『四季』（「花」を含む）、「箱根八里」、「荒城の月」など、今も歌い継がれる名曲を生み出しました。留学先で結核にかかり、帰国後の1903年にわずか23歳で亡くなっています。跡地には記念碑が建ち、東京都の旧跡に指定されています。",
+    highlights: ["「荒城の月」「花」「箱根八里」", "23歳での早すぎる死"],
+    tags: ["音楽", "作曲家", "旧居跡"],
+    wiki: ["滝廉太郎"],
+    sources: [
+      { title: "千代田区文化財サイト 滝廉太郎居住地跡", url: "https://www.edo-chiyoda.jp/knainobunkazai/bunkazaisign_hyochu_setsumeiban/2/4/245.html" },
+      { title: "Visit Chiyoda 滝廉太郎居住地跡", url: "https://visit-chiyoda.tokyo/app/spot/detail/708" }
+    ]
+  },
+  {
+    id: "bancho-shogakko",
+    name: "番町小学校（東京最古の公立小学校）",
+    era: "meiji",
+    year: 1870,
+    yearLabel: "1870年 前身の小学校／1873年 番町学校",
+    lat: 35.688, lng: 139.7335,
+    area: "六番町",
+    summary: "明治3年に始まる、東京で最も古い公立小学校。かつては校門に馬車の御者の待合所があった。",
+    detail: "番町小学校の前身は、1870年に東京府が開いた6つの小学校の一つで、現在ある東京の公立小学校で最も古いとされます。1873年に「第一番小学番町学校」となり、初めから男女共学でした。周辺に住む官僚や軍人の子どもが多く通い、校門には送り迎えの馬車の御者が待つ場所まであったといわれます。戦前から府立一中（今の日比谷高校）などへの進学率が高く、「番町小から麹町中、日比谷高校へ」という進学コースで知られる名門校となりました。",
+    highlights: ["東京最古の公立小学校", "官僚・軍人の子弟が通った名門"],
+    tags: ["学校", "教育", "明治"],
+    wiki: ["千代田区立番町小学校"],
+    sources: [
+      { title: "千代田区の文化財 番町小学校", url: "https://www.edo-chiyoda.jp/bancho-sho.html" },
+      { title: "Wikipedia 千代田区立番町小学校", url: "https://ja.wikipedia.org/wiki/%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA%E7%AB%8B%E7%95%AA%E7%94%BA%E5%B0%8F%E5%AD%A6%E6%A0%A1" }
+    ]
+  },
+  {
+    id: "bancho-kai-teijin",
+    name: "番町会と帝人事件（でっち上げの疑獄）",
+    era: "prewar",
+    dark: "事件",
+    year: 1934.3,
+    yearLabel: "1934年（昭和9年）",
+    lat: 35.6875, lng: 139.737,
+    area: "番町（郷誠之助邸、位置はおおよそ）",
+    summary: "番町の屋敷に集まった財界人グループが疑獄事件に巻き込まれ、内閣が倒れた。のちに全員無罪となった。",
+    detail: "財界の大物・郷誠之助を囲む財界人たちは、番町の郷の屋敷で毎月会食していたことから「番町会」と呼ばれました。1934年、新聞が「番町会を暴く」という連載で、メンバーが帝国人造絹糸（帝人）の株を不当に安く手に入れたと攻撃し、検察は帝人の役員や大蔵省の次官ら官僚を次々に逮捕しました。この疑獄で斎藤実内閣は総辞職に追い込まれます。しかし1937年の裁判では、起訴された16人全員が無罪となり、事件は検察がつくり上げたものだったことが明らかになりました。強引な取り調べは「検察ファッショ」と批判され、政党や財界の力が弱まって軍部の台頭を許す一因ともなりました。",
+    highlights: ["起訴された16人全員が無罪", "「検察ファッショ」"],
+    tags: ["事件", "冤罪", "政治", "財界"],
+    sources: [
+      { title: "コトバンク 帝人事件", url: "https://kotobank.jp/word/%E5%B8%9D%E4%BA%BA%E4%BA%8B%E4%BB%B6-100121" },
+      { title: "コトバンク 番町会", url: "https://kotobank.jp/word/%E7%95%AA%E7%94%BA%E4%BC%9A-118350" },
+      { title: "Wikipedia 帝人事件", url: "https://ja.wikipedia.org/wiki/%E5%B8%9D%E4%BA%BA%E4%BA%8B%E4%BB%B6" }
+    ]
+  },
+  {
+    id: "obizaka-sodesurizaka",
+    name: "帯坂と袖摺坂（番町の坂道）",
+    era: "edo",
+    year: 1636,
+    yearLabel: "江戸時代初期〜",
+    lat: 35.6905, lng: 139.7335,
+    area: "五番町・一番町（九段南四丁目との境）",
+    summary: "お菊が帯を引きずって逃げたという伝説の「帯坂」と、すれ違うと袖が触れるほど狭かった「袖摺坂」。",
+    detail: "五番町と九段南の境にある帯坂は、寛永年間に外堀が造られたとき、市ヶ谷御門へ抜ける道として切り開かれたため「切通坂」とも呼ばれました。「帯坂」の名は、怪談「番町皿屋敷」のお菊が髪を振り乱し、帯を引きずりながらこの坂を逃げたという伝説から来ています。一番町の袖摺坂は、昔はすれ違う人の袖が触れ合うほど狭かったことが名前の由来で、上の部分が広げられたのは1925年ごろのことです。旗本屋敷が並んだ番町の地形と暮らしを、坂の名前が今に伝えています。",
+    highlights: ["お菊の伝説の帯坂", "袖が触れ合うほど狭い袖摺坂"],
+    tags: ["坂", "怪談", "地名"],
+    sources: [
+      { title: "千代田区文化財サイト 帯坂", url: "https://www.edo-chiyoda.jp/knainobunkazai/bunkazaisign_hyochu_setsumeiban/3/1/190.html" },
+      { title: "千代田区 千代田区内の坂", url: "https://www.city.chiyoda.lg.jp/koho/kuse/gaiyo/yokoso/saka.html" }
+    ]
+  },
+  {
+    id: "nishogakusha",
+    name: "二松学舎（三島中洲の漢学塾）",
+    era: "meiji",
+    year: 1877.78,
+    yearLabel: "1877年（明治10年）10月10日 創立",
+    lat: 35.6925, lng: 139.744,
+    area: "三番町（旧・麹町一番町）",
+    summary: "三島中洲が自宅で開いた漢学塾。若き夏目漱石も学んだ。",
+    detail: "1877年10月10日、漢学者で法律家の三島中洲が、麹町一番町（今の三番町）の自宅に漢学塾「二松学舎」を開きました。西洋の学問が重んじられた時代に、東洋の学問と道徳を教えることを目指した塾で、少年時代の夏目漱石もここで漢学を学んでいます。現在の二松学舎大学の九段キャンパスは、創立の地に建っています。",
+    highlights: ["夏目漱石も学んだ", "創立の地に建つキャンパス"],
+    tags: ["学校", "漢学", "夏目漱石"],
+    wiki: ["二松學舍大学"],
+    sources: [
+      { title: "二松学舎 本学の歴史", url: "https://www.nishogakusha-u.ac.jp/houjin/about/houjin_1.html" },
+      { title: "Wikipedia 学校法人二松學舍", url: "https://ja.wikipedia.org/wiki/%E5%AD%A6%E6%A0%A1%E6%B3%95%E4%BA%BA%E4%BA%8C%E6%9D%BE%E5%AD%B8%E8%88%8D" }
+    ]
+  },
+  {
+    id: "otsuma",
+    name: "大妻女子大学（大妻コタカの裁縫塾）",
+    era: "meiji",
+    year: 1908,
+    yearLabel: "1908年（明治41年）創立",
+    lat: 35.6905, lng: 139.74,
+    area: "三番町",
+    summary: "24歳の大妻コタカが開いた裁縫・手芸の私塾から始まった女子大学。",
+    detail: "1908年、広島県出身の大妻コタカが24歳で、裁縫と手芸を教える私塾を開きました。これが大妻学院の始まりです。女性が技術を身につけて自立することを目指した塾は、1917年に大妻技芸学校、1942年に大妻女子専門学校となり、戦後の1949年に大妻女子大学となりました。番町にはほかにも女子英学塾（津田塾）や女子学院など女子教育の学校が集まり、「学校の街」としての番町の性格をつくりました。",
+    highlights: ["24歳で開いた私塾", "番町に集まった女子教育"],
+    tags: ["学校", "女子教育"],
+    wiki: ["大妻女子大学"],
+    sources: [
+      { title: "大妻女子大学 創立者・沿革", url: "https://www.otsuma.ac.jp/about/basic/founder/" },
+      { title: "国立国会図書館 近代日本人の肖像 大妻コタカ", url: "https://www.ndl.go.jp/portrait/datas/6177" }
+    ]
+  },
+  {
+    id: "bancho-bunjin-dori",
+    name: "番町文人通り",
+    era: "prewar",
+    year: 1920,
+    yearLabel: "明治〜昭和",
+    lat: 35.6865, lng: 139.7355,
+    area: "番町（麹町大通りと大妻通りを結ぶ道）",
+    summary: "島崎藤村、泉鏡花、有島武郎、与謝野鉄幹・晶子、藤田嗣治…多くの文化人が暮らした街の道。",
+    detail: "旗本屋敷が並んだ番町は、明治になると屋敷跡が分割されて静かな住宅地となり、多くの作家や芸術家が暮らすようになりました。島崎藤村、泉鏡花、有島武郎、与謝野鉄幹・晶子、画家の藤田嗣治など、その顔ぶれは日本の近代文化史そのものです。麹町大通りと大妻通りを結ぶ道は「番町文人通り」と名づけられ、千代田区は旧居跡に「まちの記憶保存プレート」を設置して、文化人たちの足跡を伝えています。",
+    highlights: ["まちの記憶保存プレート", "旗本屋敷から文化人の街へ"],
+    tags: ["文学", "作家", "通り"],
+    sources: [
+      { title: "Wikipedia 番町文人通り", url: "https://ja.wikipedia.org/wiki/%E7%95%AA%E7%94%BA%E6%96%87%E4%BA%BA%E9%80%9A%E3%82%8A" },
+      { title: "千代田区文化財サイト 番町文人通り", url: "https://www.edo-chiyoda.jp/bunkazaihogonotorikumi/bunkazaihogochosain/hogocho2019/1/356.html" }
+    ]
   }
 ];
 
 var TIMELINE = [
+  { year: 1934.4, label: "1934年", text: "東郷平八郎が三番町の自邸で死去。国葬に百数十万人", spot: "togo-park" },
+  { year: 1938.85, label: "1938年11月", text: "東郷邸跡が東郷元帥記念公園として開園", spot: "togo-park" },
+  { year: 1910.4, label: "1910年5月", text: "泉鏡花が下六番町に移り住む（1939年まで）", spot: "izumi-kyoka-arishima" },
+  { year: 1894, label: "1894年", text: "滝廉太郎が一番町に住み、「荒城の月」などを作曲（1901年まで）", spot: "taki-rentaro" },
+  { year: 1873, label: "1873年", text: "第一番小学番町学校（番町小学校）となる", spot: "bancho-shogakko" },
+  { year: 1934.5, label: "1934年7月", text: "帝人事件で斎藤実内閣が総辞職（1937年に全員無罪）", spot: "bancho-kai-teijin", dark: true },
+  { year: 1877.78, label: "1877年10月10日", text: "三島中洲が番町の自宅に漢学塾・二松学舎を開く", spot: "nishogakusha" },
+  { year: 1908, label: "1908年", text: "大妻コタカが番町で裁縫・手芸の私塾を開く（大妻女子大学の始まり）", spot: "otsuma" },
   { year: 1889.11, label: "1889年2月11日", text: "憲法発布の日、文部大臣・森有礼が永田町の官邸で刺される", spot: "mori-arinori", dark: true },
   { year: 1935.61, label: "1935年8月12日", text: "陸軍省で軍務局長・永田鉄山が斬殺される（相沢事件）", spot: "aizawa-jiken", dark: true },
   { year: 1913.1, label: "1913年2月", text: "神田大火で神保町一帯が焼ける", spot: "kanda-taika-iwanami", dark: true },

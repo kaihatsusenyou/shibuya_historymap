@@ -1180,7 +1180,8 @@ var SPOTS = [
       { title: "日本スポーツ振興センター 秩父宮ラグビー場の歴史", url: "https://www.jpnsport.go.jp/chichibunomiya/sisetu/tabid/82/Default.aspx" },
       { title: "Wikipedia 秩父宮ラグビー場", url: "https://ja.wikipedia.org/wiki/%E7%A7%A9%E7%88%B6%E5%AE%AE%E3%83%A9%E3%82%B0%E3%83%93%E3%83%BC%E5%A0%B4" }
     ]
-  }
+  },
+
 ];
 
 var TIMELINE = [
