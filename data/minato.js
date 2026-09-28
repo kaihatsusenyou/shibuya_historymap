@@ -1181,7 +1181,6 @@ var SPOTS = [
       { title: "Wikipedia 秩父宮ラグビー場", url: "https://ja.wikipedia.org/wiki/%E7%A7%A9%E7%88%B6%E5%AE%AE%E3%83%A9%E3%82%B0%E3%83%93%E3%83%BC%E5%A0%B4" }
     ]
   },
-,
   {
     id: "tameike",
     name: "溜池（江戸の上水とひょうたん池）",

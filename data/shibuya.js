@@ -2512,9 +2512,7 @@ var SPOTS = [
       { title: "Wikipedia 東 (渋谷区)", url: "https://ja.wikipedia.org/wiki/%E6%9D%B1%20%28%E6%B8%8B%E8%B0%B7%E5%8C%BA%29" },
       { title: "渋谷区立図書館 渋谷区の町名・地番変遷", url: "https://www.lib.city.shibuya.tokyo.jp/shibuya/shibuya-history/town-name/" }
     ]
-  },
-,
-
+  }
 ];
 
 /*
